@@ -124,6 +124,7 @@ $("#fill").focus();
     * Filter by tags.
     */
    $('.tagfilter').click(function() { 
+        event.preventDefault();
         var count = 0;
         var tag = $(this).text();
         $("#bookmarks").children().each( function() {
@@ -138,8 +139,7 @@ $("#fill").focus();
         });
 
         document.title = count +  " bookmarks";
-        return false;
-    });   
+    });
 
 });
 </script>
