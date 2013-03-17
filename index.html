@@ -1,4 +1,6 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"
+    "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
    <meta http-equiv="Content-Language" content="en-gb" />
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -6,6 +8,7 @@
 
 <script type="text/javascript" src="http://static.steve.org.uk/js/jquery/jquery.js"></script>
 <script type="text/javascript">
+<!-- 
 $(function() {
 
     /**
@@ -164,8 +167,12 @@ $(function() {
         document.title = count +  " bookmarks";
     });
 });
+-->
 </script>
 <style type="text/css">
+#tags {
+  width:200px;
+}
 .tagfilter {
   text-decoration: none;
   font-size: small;
@@ -190,8 +197,8 @@ li {
 <body>
   <fieldset>
     <legend>Filter Bookmarks</legend>
-    <form id="filter" name="filter">
-      <p>Search within bookmarks: <input type="text" name="fill" id="fill" value="" size="50"></p>
+    <form id="filter" name="filter" action="#">
+      <p>Search within bookmarks: <input type="text" name="fill" id="fill" value="" size="50" /></p>
     </form>
   </fieldset>
   
@@ -218,7 +225,7 @@ li {
         </ul>
         <!-- THE END OF BOOKMARKS -->
       </td>
-      <td id="tags" valign="top" width="200">
+      <td id="tags" valign="top">
         <p id="autotags"><b>Tags</b>: </p>
         <p>&nbsp;</p>
     </td></tr>
