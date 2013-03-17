@@ -33,7 +33,7 @@ $(function() {
     {
         var tags = {};
         $("#bookmarks").children().each( function() {
-            var tag = $(this).attr("tags");
+            var tag = $(this).attr("title");
             if ( tag ) 
             {
                 if ( tag.match( "," ) ) 
@@ -75,7 +75,7 @@ $(function() {
     function appendTags()
     {
         $("#bookmarks").children().each( function() {
-            var tag = $(this).attr("tags");
+            var tag = $(this).attr("title");
             if ( tag )
             {
                 var txt = '<ul>';
@@ -152,7 +152,7 @@ $(function() {
         var count = 0;
         var tag = $(this).text();
         $("#bookmarks").children().each( function() {
-            var tags=$(this).attr('tags');
+            var tags=$(this).attr('title');
             if ( tags && tags.match(tag) )
             {
                 $(this).show();
@@ -207,21 +207,21 @@ li {
     <tr><td valign="top">
         <!-- THE BOOKMARKS -->
         <ul id="bookmarks">
-          <li tags="debian, planet"><a href="http://planet.debian.org/">Planet Debian</a></li>
-          <li tags="debian, development"><a href="http://www.debian.org/devel/">Debian Developers' Corner</a></li>
-          <li tags="sysadmin, planet"><a href="http://planetsysadmin.com/">Planet Sysadmin</a></li>
-          <li tags="sysadmin, reddit"><a href="http://www.reddit.com/r/sysadmin">Reddit: /r/sysadmin</a></li>
-          <li tags="blog, microsoft"><a href="http://blogs.msdn.com/b/oldnewthing/">The old new thing</a></li>
-          <li tags="blog, personal"><a href="http://blog.steve.org.uk/">Steve Kemp's blog</a></li>
-          <li tags="development, personal"><a href="https://github.com/skx/">Steve Kemp's github account</a></li>
-          <li tags="news"><a href="https://news.ycombinator.com/">Hacker News</a></li>
-          <li tags="news, edinburgh"><a href="http://www.scotsman.com/edinburgh-evening-news">Edinburgh Evening News</a></li>
-          <li tags="news"><a href="http://www.bbc.co.uk/news/">BBC News</a></li>
-          <li tags="personal"><a href="http://static.steve.org.uk/start/">My start page</a></li>
-          <li tags="personal, sysadmin, debian"><a href="http://debian-administration.org/">Debian Administration</a></li>
-          <li tags="sysadmin, stackexchange"><a href="http://serverfault.com/">Server Fault</a></li>
-          <li tags="photography, stackexchange"><a href="http://photo.stackexchange.com/">Photography Exchange</a></li>
-          <li tags="reddit, photography"><a href="http://www.reddit.com/r/photography/">Reddit /r/photography</a></li>
+          <li title="debian, planet"><a href="http://planet.debian.org/">Planet Debian</a></li>
+          <li title="debian, development"><a href="http://www.debian.org/devel/">Debian Developers' Corner</a></li>
+          <li title="sysadmin, planet"><a href="http://planetsysadmin.com/">Planet Sysadmin</a></li>
+          <li title="sysadmin, reddit"><a href="http://www.reddit.com/r/sysadmin">Reddit: /r/sysadmin</a></li>
+          <li title="blog, microsoft"><a href="http://blogs.msdn.com/b/oldnewthing/">The old new thing</a></li>
+          <li title="blog, personal"><a href="http://blog.steve.org.uk/">Steve Kemp's blog</a></li>
+          <li title="development, personal"><a href="https://github.com/skx/">Steve Kemp's github account</a></li>
+          <li title="news"><a href="https://news.ycombinator.com/">Hacker News</a></li>
+          <li title="news, edinburgh"><a href="http://www.scotsman.com/edinburgh-evening-news">Edinburgh Evening News</a></li>
+          <li title="news"><a href="http://www.bbc.co.uk/news/">BBC News</a></li>
+          <li title="personal"><a href="http://static.steve.org.uk/start/">My start page</a></li>
+          <li title="personal, sysadmin, debian"><a href="http://debian-administration.org/">Debian Administration</a></li>
+          <li title="sysadmin, stackexchange"><a href="http://serverfault.com/">Server Fault</a></li>
+          <li title="photography, stackexchange"><a href="http://photo.stackexchange.com/">Photography Exchange</a></li>
+          <li title="reddit, photography"><a href="http://www.reddit.com/r/photography/">Reddit /r/photography</a></li>
         </ul>
         <!-- THE END OF BOOKMARKS -->
       </td>
