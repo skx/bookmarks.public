@@ -25,7 +25,7 @@ function sortBookmarks()
    */
 function populateTags() {
     var tags = {};
-    $("#bookmarks").children().each( function() { 
+    $("#bookmarks").children().each( function() {
         var tag = $(this).attr("tags");
         if ( tag ) {
             if ( tag.match( "," ) ) {
@@ -35,8 +35,8 @@ function populateTags() {
                     nm = nm.replace(/(^\s+|\s+$)/g,'');
                     tags[ nm ] = 1;
                  }
-            } 
-            else {  
+            }
+            else {
                 tag = tag.replace(/(^\s+|\s+$)/g,'');
                 tags[tag]= 1;
             }
@@ -45,7 +45,7 @@ function populateTags() {
 
     var keys = [];
     for( var t in tags ) {
-       keys.push( t ); 
+       keys.push( t );
     }
 
     keys.sort();
@@ -71,8 +71,8 @@ function appendTags() {
                    nm = nm.replace(/(^\s+|\s+$)/g,'');
                    txt += "<a class=\"tagfilter\" href=\"#\">" + nm + "</a>, ";
                }
-           } 
-           else {  
+           }
+           else {
                tag = tag.replace(/(^\s+|\s+$)/g,'');
                txt += "<a class=\"tagfilter\"  href=\"#\">" + tag + "</a>, ";
            }
@@ -98,7 +98,7 @@ $("#fill").focus();
    /**
     * Search by title/url
     */
-  $("#fill").keydown(function() { 
+  $("#fill").keydown(function() {
       filter = $("#fill").val().toLowerCase();
       var count = 0;
 
@@ -107,8 +107,8 @@ $("#fill").focus();
           var link=$(this).find("a");
           if ( link ) {
              link = link.attr("href").toLowerCase();
-          }      
-          if ( name.match( filter ) || link.match(filter) || filter == "" ) { 
+          }
+          if ( name.match( filter ) || link.match(filter) || filter == "" ) {
               $(this).show();
               count += 1;
           }
@@ -117,13 +117,13 @@ $("#fill").focus();
           }
       } );
       document.title = count +  " bookmarks";
-  }) 
+  })
 
 
    /**
     * Filter by tags.
     */
-   $('.tagfilter').click(function() { 
+   $('.tagfilter').click(function(event) {
         event.preventDefault();
         var count = 0;
         var tag = $(this).text();
@@ -134,7 +134,7 @@ $("#fill").focus();
                 count += 1;
             }
             else {
-                $(this).hide(); 
+                $(this).hide();
             }
         });
 
@@ -144,7 +144,7 @@ $("#fill").focus();
 });
 </script>
 <style>
-.tagfilter { 
+.tagfilter {
   text-decoration: none;
   font-size: small;
 }
@@ -159,7 +159,7 @@ td {
   padding: 0.5em;
   border: 1px solid silver;
 }
-li { 
+li {
   padding: 0.2em;
   border-bottom: 1px dashed silver;
 }
