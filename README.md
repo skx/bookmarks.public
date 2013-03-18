@@ -22,11 +22,10 @@ new items can be added easily, and the javascript magic will make the list manag
 Online Demo
 -----------
 
-You may [try out the interface](http://htmlpreview.github.com/?http://raw.github.com/skx/bookmarks.public/master/index.html) with the stub-bookmarks added in the sampel `index.html`.
+You may [try out the interface](http://www.steve.org.uk/Software/bookmarks/bookmarks.public/) which contains only the sample bookmarks.
 
-The bookmarks in the demo are only those I added randomly, but are sufficient to show the
-way it works.  Fork to your own repository or `wget` the RAW image and host it yourself if
-you wish to keep your bookmarks private, as I do!
+The included bookmarks are sufficient to show the way this tool works.  Fork to your own
+repository or `wget` the RAW image and host it yourself if you wish to keep your bookmarks private, as I do!
 
 Steve
 --
