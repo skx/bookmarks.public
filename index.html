@@ -8,7 +8,7 @@
 
 <script type="text/javascript" src="http://static.steve.org.uk/js/jquery/jquery.js"></script>
 <script type="text/javascript">
-<!-- 
+<!--
 $(function() {
 
     /**
@@ -29,24 +29,24 @@ $(function() {
      * This horrible function is here to collect each distinct tag,
      * stripping whitespace, and placing into sorted order.
      */
-    function populateTags() 
+    function populateTags()
     {
         var tags = {};
         $("#bookmarks").children().each( function() {
             var tag = $(this).attr("title");
-            if ( tag ) 
+            if ( tag )
             {
-                if ( tag.match( "," ) ) 
+                if ( tag.match( "," ) )
                 {
                     var a = tag.split( "," );
-                    for ( i in a ) 
+                    for ( i in a )
                     {
                         var nm = a[i];
                         nm = nm.replace(/(^\s+|\s+$)/g,'');
                         tags[ nm ] = 1;
                     }
                 }
-                else 
+                else
                 {
                     tag = tag.replace(/(^\s+|\s+$)/g,'');
                     tags[tag]= 1;
@@ -61,7 +61,7 @@ $(function() {
         }
 
         keys.sort();
-        for ( t in keys ) 
+        for ( t in keys )
         {
             $("#autotags").append( "<a class=\"tagfilter\" href=\"#" + escape(keys[t]) + "\">" + keys[t] + "</a>, ");
         }
@@ -143,6 +143,26 @@ $(function() {
         document.title = count +  " bookmarks";
     })
 
+    /**
+     * Show only entries with zero tags.
+     */
+    $('#untagged').click(function(event){
+        event.preventDefault();
+        var count = 0;
+        $("#bookmarks").children().each( function() {
+            var tags=$(this).attr('title');
+            if( tags )
+            {
+                $(this).hide();
+            }
+            else
+            {
+                count+=1;
+                $(this).show();
+            }
+        });
+        document.title = count +  " bookmarks";
+     });
 
     /**
      * Filter by tags.
@@ -163,7 +183,6 @@ $(function() {
                 $(this).hide();
             }
         });
-        
         document.title = count +  " bookmarks";
     });
 });
@@ -171,11 +190,14 @@ $(function() {
 </script>
 <style type="text/css">
 #tags {
-  width:200px;
+  width: 200px;
+}
+h2 {
+  border-bottom: 1px solid black;
 }
 .tagfilter {
   text-decoration: none;
-  font-size: small;
+  font-family: monospace;
 }
 #bookmarks {
   list-style: none;
@@ -195,14 +217,14 @@ li {
 </style>
  </head>
 <body>
+  <h1>Bookmarks</h1>
   <fieldset>
     <legend>Filter Bookmarks</legend>
     <form id="filter" name="filter" action="#">
       <p>Search within bookmarks: <input type="text" name="fill" id="fill" value="" size="50" /></p>
     </form>
   </fieldset>
-  
-  <h2>Bookmarks</h2>
+
   <table>
     <tr><td valign="top">
         <!-- THE BOOKMARKS -->
@@ -226,8 +248,11 @@ li {
         <!-- THE END OF BOOKMARKS -->
       </td>
       <td id="tags" valign="top">
-        <p id="autotags"><b>Tags</b>: </p>
+        <h2>Tags</h2>
+        <p id="autotags"></p>
         <p>&nbsp;</p>
+        <h2>Untagged</h2>
+        <p>View <a href="#untagged" id="untagged">untagged</a>.</p>
     </td></tr>
   </table>
 </body>
