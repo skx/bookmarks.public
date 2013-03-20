@@ -5,7 +5,7 @@
    <meta http-equiv="Content-Language" content="en-gb" />
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
  <title>My Bookmarks</title>
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
 <!--
 $(function() {
@@ -136,13 +136,13 @@ $(function() {
         filter = $("#fill").val().toLowerCase();
 
         $("#bookmarks").children().each( function(){
-            var name=$(this).text().toLowerCase();
-            var link=$(this).find("a");
-            if ( link )
+            var title=$(this).text().toLowerCase();
+            var links=$(this).find("a");
+            if ( typeof links !== 'undefined' )
             {
-                link = link.attr("href").toLowerCase();
+                links = links.attr("href").toLowerCase();
             }
-            if ( name.match( filter ) || link.match(filter) || filter == "" )
+            if ( title.match( filter ) || links.match(filter) || filter == "" )
             {
                 $(this).show();
             }
@@ -162,14 +162,7 @@ $(function() {
         event.preventDefault();
         $("#bookmarks").children().each( function() {
             var tags=$(this).attr('title');
-            if( tags )
-            {
-                $(this).hide();
-            }
-            else
-            {
-                $(this).show();
-            }
+            tags ? $(this).hide() : $(this).show();
         });
         updateTitle();
      });
@@ -182,14 +175,7 @@ $(function() {
         var tag = $(this).text();
         $("#bookmarks").children().each( function() {
             var tags=$(this).attr('title');
-            if ( tags && tags.match(tag) )
-            {
-                $(this).show();
-            }
-            else
-            {
-                $(this).hide();
-            }
+            ( tags && tags.match(tag) ) ? $(this).show() : $(this).hide() ;
         });
         updateTitle();
     });
