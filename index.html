@@ -64,12 +64,14 @@ $(function() {
         {
             $("#autotags").append( "<a class=\"tagfilter\" href=\"#" + escape(keys[t]) + "\">" + keys[t] + "</a>, ");
         }
+
+        /** Remove trailng ", ". */
         $("#autotags").html( $("#autotags").html().replace( /, $/, '.' ) );
     }
 
 
     /**
-     * Append the list of tags to each bookmark, for easy viewing.
+     * Append the list of tags beneath each bookmark, for easy viewing.
      */
     function appendTags()
     {
@@ -93,6 +95,7 @@ $(function() {
                     tag = tag.replace(/(^\s+|\s+$)/g,'');
                     txt += "<a class=\"tagfilter\"  href=\"#\">" + tag + "</a>, ";
                 }
+                /** Remove trailng ", ". */
                 txt = txt.replace( /, $/, "." );
                 $(this).append( txt + "</ul>" );
             }
@@ -103,20 +106,20 @@ $(function() {
     /**
      * Code the launches at page-load-time.
      */
-    // Sort the bookmarks
+    /** Sort the bookmarks */
     sortBookmarks();
 
-    // Populate the tags pane.
+    /** Populate the tags pane. */
     populateTags();
 
-    // Append the tags beneath each bookmark.
+    /** Append the tags beneath each bookmark. */
     appendTags();
 
     // Focus on the search/filter box.
     $("#fill").focus();
 
     /**
-     * Search by title/url
+     * Search by title/url - case insensitive.
      */
     $("#fill").keyup(function() {
         filter = $("#fill").val().toLowerCase();
@@ -141,6 +144,7 @@ $(function() {
         } );
         document.title = count +  " bookmarks";
     })
+
 
     /**
      * Show only entries with zero tags.
