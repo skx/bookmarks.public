@@ -44,7 +44,7 @@ $(function() {
         var tags = {};
         $("#bookmarks").children().each( function() {
             var tag = $(this).attr("title");
-            if ( tag )
+            if ( typeof tag !== 'undefined' )
             {
                 if ( tag.match( "," ) )
                 {
@@ -53,13 +53,13 @@ $(function() {
                     {
                         var nm = a[i];
                         nm = nm.replace(/(^\s+|\s+$)/g,'');
-                        tags[ nm ] = 1;
+                        tags[ nm.toLowerCase() ] = 1;
                     }
                 }
                 else
                 {
                     tag = tag.replace(/(^\s+|\s+$)/g,'');
-                    tags[tag]= 1;
+                    tags[tag.toLowerCase()]= 1;
                 }
             }
         });
@@ -88,7 +88,7 @@ $(function() {
     {
         $("#bookmarks").children().each( function() {
             var tag = $(this).attr("title");
-            if ( tag )
+            if ( typeof tag !== 'undefined' )
             {
                 var txt = '<ul>';
                 if ( tag.match( "," ) )
