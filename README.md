@@ -3,11 +3,12 @@ bookmarks.public
 
 This repository contains the single HTML file `index.html`.
 
-The bookmarks file is a _template_ which is designed to be edited by the user,
-simply replace the bookmarks in the single unordered-list with your own.
+The bookmarks file is a template which is designed to be edited by the user,
+they should replace the bookmarks in the single unordered-list with their own.
 
-Open the file in a browser and you have a simple to use interface for your
-bookmarks.
+The bookmarks file contains some simple javascript which should allow simple
+navigtation and interactive use of the bookmarks, when opened via a browser.
+
 
 Online Demo
 -----------
