@@ -91,22 +91,15 @@ $(function() {
             if ( typeof tag !== 'undefined' )
             {
                 var txt = '<ul>';
-                if ( tag.match( "," ) )
+                var array = tag.toLowerCase().split( "," );
+                for ( i in array )
                 {
-                    var array = tag.split( "," );
-                    for ( i in array )
-                    {
-                        var nm = array[i];
-                        nm = nm.replace(/(^\s+|\s+$)/g,'');
-                        txt += "<a class=\"tagfilter\" href=\"#\">" + nm + "</a>, ";
-                    }
+                    var nm = array[i];
+                    nm = nm.replace(/(^\s+|\s+$)/g,'');
+                    txt += "<a class=\"tagfilter\" href=\"#\">" + nm + "</a>, ";
                 }
-                else
-                {
-                    tag = tag.replace(/(^\s+|\s+$)/g,'');
-                    txt += "<a class=\"tagfilter\"  href=\"#\">" + tag + "</a>, ";
-                }
-                /** Remove trailng ", ". */
+
+                /** Remove trailing ", ". */
                 txt = txt.replace( /, $/, "." );
                 $(this).append( txt + "</ul>" );
             }
@@ -115,8 +108,9 @@ $(function() {
 
 
     /**
-     * Code the launches at page-load-time.
+     * Code the launches at page-load-time:
      */
+
     /** Sort the bookmarks */
     sortBookmarks();
 
@@ -128,6 +122,13 @@ $(function() {
 
     // Focus on the search/filter box.
     $("#fill").focus();
+
+
+
+    /**
+     * Bind event handlers...
+     */
+
 
     /**
      * Search by title/url - case insensitive.
@@ -142,14 +143,8 @@ $(function() {
             {
                 links = links.attr("href").toLowerCase();
             }
-            if ( title.match( filter ) || links.match(filter) || filter == "" )
-            {
-                $(this).show();
-            }
-            else
-            {
-                $(this).hide();
-            }
+            ( title.match( filter ) || links.match(filter) || filter == "" )
+                ? $(this).show() : $(this).hide();
         } );
         updateTitle();
     })
@@ -162,23 +157,29 @@ $(function() {
         event.preventDefault();
         $("#bookmarks").children().each( function() {
             var tags=$(this).attr('title');
-            tags ? $(this).hide() : $(this).show();
+            ( typeof tags !== 'undefined' ) ? $(this).hide() : $(this).show();
         });
         updateTitle();
      });
 
+
     /**
-     * Filter by tags.
+     * Show only entries with a given tag.
      */
-    $('.tagfilter').click(function(event){
+    $('.tagfilter').click(function(event) {
         event.preventDefault();
+
+        /* the tag we're looking for */
         var tag = $(this).text();
+
         $("#bookmarks").children().each( function() {
             var tags=$(this).attr('title');
-            ( tags && tags.match(tag) ) ? $(this).show() : $(this).hide() ;
+            ( ( typeof tags !== 'undefined' ) && ( tags.toLowerCase().match(tag) ) )
+                ? $(this).show() : $(this).hide() ;
         });
         updateTitle();
     });
+
 });
 -->
 </script>
@@ -232,7 +233,7 @@ li {
           <li title="development, personal"><a href="https://github.com/skx/">Steve Kemp's github account</a></li>
           <li title="news"><a href="https://news.ycombinator.com/">Hacker News</a></li>
           <li title="news, edinburgh"><a href="http://www.scotsman.com/edinburgh-evening-news">Edinburgh Evening News</a></li>
-          <li title="news"><a href="http://www.bbc.co.uk/news/">BBC News</a></li>
+          <li title="NEws"><a href="http://www.bbc.co.uk/news/">BBC News</a></li>
           <li title="personal"><a href="http://static.steve.org.uk/start/">My start page</a></li>
           <li title="personal, sysadmin, debian"><a href="http://debian-administration.org/">Debian Administration</a></li>
           <li title="sysadmin, stackexchange"><a href="http://serverfault.com/">Server Fault</a></li>
