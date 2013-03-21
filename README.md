@@ -4,7 +4,7 @@ bookmarks.public
 This repository contains the single HTML file `index.html`.
 
 The bookmarks file is a template which is designed to be edited by the user,
-they should replace the bookmarks in the single unordered-list with their own.
+replacing the bookmarks in the single unordered-list with their own.
 
 The bookmarks file contains some simple javascript which should allow simple
 navigtation and interactive use of the bookmarks, when opened via a browser.
@@ -13,7 +13,7 @@ navigtation and interactive use of the bookmarks, when opened via a browser.
 Online Demo
 -----------
 
-You may [try out the interface](http://www.steve.org.uk/Software/bookmarks/bookmarks.public/) which contains a small collection of sample bookmarks.
+You may [try out the interface](http://www.steve.org.uk/Software/bookmarks/bookmarks.public/) as the sample page contains a small number of (tagged) bookmarks.
 
 
 Rationale
@@ -37,7 +37,7 @@ Using
 -----
 
 If you wish to use this bookmarks script, and are happy for your boobkmarks
-to be public, then just fork the repository and have at it.
+to be public, then just fork [this repository](https://github.com/skx/bookmarks.public) and you're done.
 
 If you prefer to keep your bookmarks private, as I do, then you'll need to
 clone the repository somewhere private.
@@ -46,10 +46,9 @@ clone the repository somewhere private.
 Contributing
 ------------
 
-If you wish to submit improvements to the javascript code then I welcome forks
-& pull requests.  The sample bookmarks should probably not be changed too much
-though - unless you add any major new feature(s).
+If you wish to submit improvements to the javascript code, or layout, then I welcome forks & pull requests.
 
+(If you submit a change feel free to add a link to your homepage/blog/whatever as part of that.  The sample bookmarks are only samples.)
 
 Steve
 --
