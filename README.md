@@ -36,7 +36,7 @@ they will continue to work for me easily.
 Using
 -----
 
-If you wish to use this bookmarks script, and are happy for your boobkmarks
+If you wish to use this bookmarks script, and are happy for your bookmarks
 to be public, then just fork [this repository](https://github.com/skx/bookmarks.public) and you're done.
 
 If you prefer to keep your bookmarks private, as I do, then you'll need to
