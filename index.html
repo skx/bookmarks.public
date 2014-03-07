@@ -74,6 +74,7 @@ $(function() {
         for ( t in keys )
         {
             $("#autotags").append( "<a class=\"tagfilter\" href=\"#" + escape(keys[t]) + "\">" + keys[t] + "</a>, ");
+
         }
 
         /** Remove trailng ", ". */
@@ -90,18 +91,18 @@ $(function() {
             var tag = $(this).attr("title");
             if ( typeof tag !== 'undefined' )
             {
-                var txt = '<ul>';
+                var txt = '<ul><li>';
                 var array = tag.toLowerCase().split( "," );
                 for ( i in array )
                 {
                     var nm = array[i];
                     nm = nm.replace(/(^\s+|\s+$)/g,'');
-                    txt += "<a class=\"tagfilter\" href=\"#\">" + nm + "</a>, ";
+                    txt += "<a class=\"tagfilter\" href=\"#" + escape(nm) + "\">" + nm + "</a>, ";
                 }
 
                 /** Remove trailing ", ". */
                 txt = txt.replace( /, $/, "." );
-                $(this).append( txt + "</ul>" );
+                $(this).append( txt + "</li></ul>" );
             }
         });
     }
@@ -128,6 +129,28 @@ $(function() {
     /**
      * Bind event handlers...
      */
+    /**
+     * take the anchor (aka hash) and use it as filter to
+     * show only entries with a given tag
+     */
+    window.onhashchange = function() {
+        if (typeof window.location.hash !== 'string' || window.location.hash.length === 0)
+        {
+            $("#bookmarks").children().each( function() {
+                $(this).show();
+            });
+            updateTitle();
+            return;
+        }
+
+        var tag = window.location.hash.substring(1);
+        $("#bookmarks").children().each( function() {
+            var tags=$(this).attr('title');
+            ( ( typeof tags !== 'undefined' ) && ( tags.toLowerCase().match(tag) ) )
+                ? $(this).show() : $(this).hide() ;
+        });
+        updateTitle();
+    }
 
 
     /**
@@ -163,22 +186,6 @@ $(function() {
      });
 
 
-    /**
-     * Show only entries with a given tag.
-     */
-    $('.tagfilter').click(function(event) {
-        event.preventDefault();
-
-        /* the tag we're looking for */
-        var tag = $(this).text();
-
-        $("#bookmarks").children().each( function() {
-            var tags=$(this).attr('title');
-            ( ( typeof tags !== 'undefined' ) && ( tags.toLowerCase().match(tag) ) )
-                ? $(this).show() : $(this).hide() ;
-        });
-        updateTitle();
-    });
 
 });
 -->
@@ -204,10 +211,6 @@ table {
 td {
   padding: 0.5em;
   border: 1px solid silver;
-}
-li {
-  padding: 0.2em;
-  border-bottom: 1px dashed silver;
 }
 </style>
  </head>
