@@ -226,8 +226,8 @@
                     var tag = window.location.hash.substring(1);
                     $("#bookmarks").children().each(function () {
                         var tags = $(this).attr('title');
-                        ((typeof tags !== 'undefined') && (tags.toLowerCase().match(tag)))
-                                ? $(this).show() : $(this).hide();
+                        ((typeof tags !== 'undefined') && (tags.toLowerCase().match(decodeURIComponent(tag))))
+                                ? $(this).show() : $(this).hide();  // decodeURIComponent needed to handle special chars in tags
                     });
                     updateTitle();
                 };
@@ -293,7 +293,7 @@
     <body>
         <table>
             <tr>
-                <td rowspan="2" valign="top">
+                <td rowspan="1" valign="top">
                     <!-- THE BOOKMARKS -->
                     <ul class="bookmarks" id="bookmarks">
                         <li title="debian, planet"><a href="http://planet.debian.org/">Planet Debian</a></li>
@@ -305,7 +305,7 @@
                         <li title="development, personal"><a href="https://github.com/skx/">Steve Kemp's github account</a></li>
                         <li title="news"><a href="https://news.ycombinator.com/">Hacker News</a></li>
                         <li title="news, edinburgh"><a href="http://www.scotsman.com/edinburgh-evening-news">Edinburgh Evening News</a></li>
-                        <li title="NEws"><a href="http://www.bbc.co.uk/news/">BBC News</a></li>
+                        <li title="pippo pelo, NEws"><a href="http://www.bbc.co.uk/news/">BBC News</a></li>
                         <li title="personal"><a href="http://static.steve.org.uk/start/">My start page</a></li>
                         <li title="personal, sysadmin, debian"><a href="http://debian-administration.org/">Debian Administration</a></li>
                         <li title="sysadmin, stackexchange"><a href="http://serverfault.com/">Server Fault</a></li>
@@ -316,28 +316,28 @@
                     <!-- THE END OF BOOKMARKS -->
                 </td>
                 <td id="tags" valign="top">
-                    <h2>Tags</h2>
-                    <p id="autotags">
-                    </p>
-                    <p> 
-                        <a title="Show untagged bookmarks" href="#untagged" id="untagged">untagged</a>
-                    </p>
-                    <p> 
-                        <input type="checkbox" name="TagsCheck" id="TagsCheck" value="ShowTags" onclick="toggleTags()"/>Show Tags
-                        <button title="Show all bookmarks" type="button" onclick="clearFilter()">Show All</button>
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td id="actions" valign="top">
                     <fieldset>
-                        <legend>Filter Bookmarks </legend>
+                        <legend><b>Tags</b></legend>
+                        <p id="autotags">
+                        </p>
+                        <p> 
+                            <a title="Show untagged bookmarks" href="#untagged" id="untagged">untagged</a>
+                        </p>
+                        <p> 
+                            <input type="checkbox" name="TagsCheck" id="TagsCheck" value="ShowTags" onclick="toggleTags()"/>Show Tags
+                            <button title="Show all bookmarks" type="button" onclick="clearFilter()">Show All</button>
+                        </p>
+                    </fieldset>
+                    <p> </p>
+                    <fieldset>
+                        <legend><b>Filter Bookmarks </b></legend>
                         <form id="filter" name="filter" action="#">
                             <p>Search within bookmarks: <input type="text" name="fill" id="fill" value="" size="50" /></p>
                         </form>
                     </fieldset>
+                    <p> </p>
                     <fieldset>
-                        <legend>Add Bookmark </legend>
+                        <legend><b>Add Bookmark </b></legend>
                         <form id="newForm" name="newForm">
                             <p>Name: <input type="text" name="newname" id="newName" value="" size="50" /></p>
                             <p>Link: <input type="text" name="newLink" id="newLink" value="" size="50" /></p>
