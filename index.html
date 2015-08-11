@@ -5,7 +5,7 @@
         <title>My Bookmarks</title>
         <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript">
-            <!--
+<!--
             /**
              * Show all bookmarks
              */
@@ -41,7 +41,8 @@
                     var tag = $(this).attr("title");
                     if (id === "newOne")
                     {
-                        if (document.getElementById("showTags").disabled) {
+                        var checkbox = document.getElementById("TagsCheck");
+                        if (checkbox.checked === true) {
                             decorate($(this), tag);
                         }
                         $(this).removeAttr("id");
@@ -98,6 +99,16 @@
                 $("#autotags").html($("#autotags").html().replace(/, $/, '.'));
             }
 
+            function toggleTags() {
+                var checkbox = document.getElementById("TagsCheck");
+                if (checkbox.checked === true) {
+                    appendTags();
+                }
+                else {
+                    hideTags();
+                }
+            }
+
 //            function removeDuplicates(a) {
 //                return a.reduce(function(result, element) {
 //                    if (result.indexOf(element) < 0)
@@ -106,7 +117,7 @@
 //                }, []);
 //            }
             /**
-             *  Used by appendTags()
+             *  Used by showTags()
              *  @param entry    the bookmark to be decorated
              *  @param tag      the list of tags to add to the entry
              */
@@ -125,10 +136,24 @@
                 entry.append(txt + "</li></ul>");
             }
 
+
+            /**
+             * Toggles the visibility of the tags below the links
+             */
+            function toggleTags() {
+                var checkbox = document.getElementById("TagsCheck");
+                if (checkbox.checked === true) {
+                    showTags();
+                }
+                else {
+                    hideTags();
+                }
+            }
+
             /**
              * Append the list of tags beneath each bookmark, for easy viewing.
              */
-            function appendTags()
+            function showTags()
             {
                 $("#bookmarks").children().each(function () {
                     var tag = $(this).attr("title");
@@ -137,8 +162,6 @@
                         decorate($(this), tag);
                     }
                 });
-                document.getElementById("hideTags").disabled = false;
-                document.getElementById("showTags").disabled = true;
             }
 
             /**
@@ -154,12 +177,9 @@
                         $(this).html(tagsStripped);
                     }
                 });
-                document.getElementById("hideTags").disabled = true;
-                document.getElementById("showTags").disabled = false;
             }
 
             $(function () {
-
                 /**
                  * Sort the items in the UL which contains our bookmarks.
                  */
@@ -248,7 +268,7 @@
         </script>
         <style type="text/css">
             #tags {
-                width: 200px;
+                width: 50%;
             }
             h2 {
                 border-bottom: 1px solid black;
@@ -303,8 +323,7 @@
                         <a title="Show untagged bookmarks" href="#untagged" id="untagged">untagged</a>
                     </p>
                     <p> 
-                        <button title="Show tags  for each bookmark" type="button" id="showTags" onclick="appendTags()">Show with tags</button>
-                        <button title="Hide bookmarks tags" type="button" id="hideTags" onclick="hideTags()"  disabled="">Hide Tags</button>
+                        <input type="checkbox" name="TagsCheck" id="TagsCheck" value="ShowTags" onclick="toggleTags()"/>Show Tags
                         <button title="Show all bookmarks" type="button" onclick="clearFilter()">Show All</button>
                     </p>
                 </td>
