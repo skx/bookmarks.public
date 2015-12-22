@@ -5,258 +5,258 @@
         <title>My Bookmarks</title>
         <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript">
-<!--
-            /**
-             * Show all bookmarks
-             */
-            function clearFilter() {
-                $("#bookmarks").children().each(function () {
-                    $(this).show();
-                });
-                updateTitle();
-            }
+    <!--
+/**
+ * Show all bookmarks
+ */
+function clearFilter() {
+    $("#bookmarks").children().each(function () {
+        $(this).show();
+    });
+    updateTitle();
+}
 
-            /**
-             * Show the number of visible bookmarks in the titlebar.
-             */
-            function updateTitle()
+/**
+ * Show the number of visible bookmarks in the titlebar.
+ */
+function updateTitle() {
+    var count = $("#bookmarks").children().filter(":visible").size();
+    var plural = ((count === 0) || (count > 1)) ? 's' : '';
+    document.title = count + " visible bookmark" + plural;
+}
+
+function addBookmark() {
+    var name = $("#newName").val();
+    var link = $("#newLink").val();
+    var tags = $("#newTags").val();
+    var current = document.getElementById("bookmarks").innerHTML;
+    var entry = '<li id="newOne" title="' + tags + '"><a href="' + link + '">' + name + '</a></li>';
+    current = current + entry;
+    document.getElementById("bookmarks").innerHTML = current;
+    populateTags();
+    // Append tag to the newly added bookmark
+    $("#bookmarks").children().each(function () {
+        var id = $(this).attr("id");
+        var tag = $(this).attr("title");
+        if (id === "newOne")
+        {
+            var checkbox = document.getElementById("TagsCheck");
+            if (checkbox.checked === true) {
+                decorate($(this), tag);
+            }
+            $(this).removeAttr("id");
+        }
+    });
+    var form = document.getElementById("newForm");
+    form.reset();
+}
+
+/**
+ * This function collects each distinct tag,
+ * stripping whitespace, and placing into sorted order.
+ */
+function populateTags() {
+    var tags = {};
+    $("#bookmarks").children().each(function () {
+        var tag = $(this).attr("title");
+        if (typeof tag !== 'undefined')
+        {
+            if (tag.match(","))
             {
-                var count = $("#bookmarks").children().filter(":visible").size();
-                var plural = ((count === 0) || (count > 1)) ? 's' : '';
-                document.title = count + " visible bookmark" + plural;
-            }
-
-            function addBookmark() {
-                var name = $("#newName").val();
-                var link = $("#newLink").val();
-                var tags = $("#newTags").val();
-                var current = document.getElementById("bookmarks").innerHTML;
-                var entry = '<li id="newOne" title="' + tags + '"><a href="' + link + '">' + name + '</a></li>';
-                current = current + entry;
-                document.getElementById("bookmarks").innerHTML = current;
-                populateTags();
-                // Append tag to the newly added bookmark
-                $("#bookmarks").children().each(function () {
-                    var id = $(this).attr("id");
-                    var tag = $(this).attr("title");
-                    if (id === "newOne")
-                    {
-                        var checkbox = document.getElementById("TagsCheck");
-                        if (checkbox.checked === true) {
-                            decorate($(this), tag);
-                        }
-                        $(this).removeAttr("id");
-                    }
-                });
-                var form = document.getElementById("newForm");
-                form.reset();
-            }
-
-            /**
-             * This function collects each distinct tag,
-             * stripping whitespace, and placing into sorted order.
-             */
-            function populateTags()
-            {
-                var tags = {};
-                $("#bookmarks").children().each(function () {
-                    var tag = $(this).attr("title");
-                    if (typeof tag !== 'undefined')
-                    {
-                        if (tag.match(","))
-                        {
-                            var a = tag.split(",");
-                            for (var i in a)
-                            {
-                                var nm = a[i];
-                                nm = nm.replace(/(^\s+|\s+$)/g, '');
-                                tags[ nm.toLowerCase() ] = 1;
-                            }
-                        }
-                        else
-                        {
-                            tag = tag.replace(/(^\s+|\s+$)/g, '');
-                            tags[tag.toLowerCase()] = 1;
-                        }
-                    }
-                });
-
-                var keys = [];
-                for (var t in tags)
+                var a = tag.split(",");
+                for (var i in a)
                 {
-                    keys.push(t);
-                }
-
-                var cleanKeys = $.unique(keys); // remove duplicate tags
-                cleanKeys.sort();
-                $("#autotags").html("");
-                for (t in cleanKeys)
-                {
-                    $("#autotags").append("<a class=\"tagfilter\" href=\"#" + escape(cleanKeys[t]) + "\">" + cleanKeys[t] + "</a>, ");
-                }
-
-                /** Remove trailing ", ". */
-                $("#autotags").html($("#autotags").html().replace(/, $/, '.'));
-            }
-
-            function toggleTags() {
-                var checkbox = document.getElementById("TagsCheck");
-                if (checkbox.checked === true) {
-                    appendTags();
-                }
-                else {
-                    hideTags();
-                }
-            }
-
-            /**
-             *  Used by showTags()
-             *  @param entry    the bookmark to be decorated
-             *  @param tag      the list of tags to add to the entry
-             */
-            function decorate(entry, tag) {
-                var txt = '\n<ul><li>';
-                var array = tag.toLowerCase().split(",");
-                for (var i in array)
-                {
-                    var nm = array[i];
+                    var nm = a[i];
                     nm = nm.replace(/(^\s+|\s+$)/g, '');
-                    txt += "<a class=\"tagfilter\" href=\"#" + escape(nm) + "\">" + nm + "</a>, ";
-                }
-
-                /** Remove trailing ", ". */
-                txt = txt.replace(/, $/, ".");
-                entry.append(txt + "</li></ul>");
-            }
-
-
-            /**
-             * Toggles the visibility of the tags below the links
-             */
-            function toggleTags() {
-                var checkbox = document.getElementById("TagsCheck");
-                if (checkbox.checked === true) {
-                    showTags();
-                }
-                else {
-                    hideTags();
+                    tags[ nm.toLowerCase() ] = 1;
                 }
             }
-
-            /**
-             * Append the list of tags beneath each bookmark, for easy viewing.
-             */
-            function showTags()
+            else
             {
-                $("#bookmarks").children().each(function () {
-                    var tag = $(this).attr("title");
-                    if (typeof tag !== 'undefined')
-                    {
-                        decorate($(this), tag);
-                    }
-                });
+                tag = tag.replace(/(^\s+|\s+$)/g, '');
+                tags[tag.toLowerCase()] = 1;
             }
+        }
+    });
 
-            /**
-             * Remove the list of tags beneath each bookmark, so that the file can be saved back.
-             */
-            function hideTags()
+    var keys = [];
+    for (var t in tags)
+    {
+        keys.push(t);
+    }
+
+    var cleanKeys = $.unique(keys); // remove duplicate tags
+    cleanKeys.sort();
+    $("#autotags").html("");
+    for (t in cleanKeys)
+    {
+        $("#autotags").append("<a class=\"tagfilter\" href=\"#" + escape(cleanKeys[t]) + "\">" + cleanKeys[t] + "</a>, ");
+    }
+
+    /** Remove trailing ", ". */
+    $("#autotags").html($("#autotags").html().replace(/, $/, '.'));
+}
+
+function toggleTags() {
+    var checkbox = document.getElementById("TagsCheck");
+    if (checkbox.checked === true) {
+        appendTags();
+    }
+    else {
+        hideTags();
+    }
+}
+
+/**
+ *  Used by showTags()
+ *  @param entry    the bookmark to be decorated
+ *  @param tag      the list of tags to add to the entry
+ */
+function decorate(entry, tag) {
+    var txt = '\n<ul><li>';
+    var array = tag.toLowerCase().split(",");
+    for (var i in array)
+    {
+        var nm = array[i];
+        nm = nm.replace(/(^\s+|\s+$)/g, '');
+        txt += "<a class=\"tagfilter\" href=\"#" + escape(nm) + "\">" + nm + "</a>, ";
+    }
+
+    /** Remove trailing ", ". */
+    txt = txt.replace(/, $/, ".");
+    entry.append(txt + "</li></ul>");
+}
+
+
+/**
+ * Toggles the visibility of the tags below the links
+ */
+function toggleTags() {
+    var checkbox = document.getElementById("TagsCheck");
+    if (checkbox.checked === true) {
+        showTags();
+    }
+    else {
+        hideTags();
+    }
+}
+
+/**
+ * Append the list of tags beneath each bookmark, for easy viewing.
+ */
+function showTags() {
+    $("#bookmarks").children().each(function () {
+        var tag = $(this).attr("title");
+        if (typeof tag !== 'undefined')
+        {
+            decorate($(this), tag);
+        }
+    });
+}
+
+/**
+ * Remove the list of tags beneath each bookmark, so that the file can be saved back.
+ */
+function hideTags() {
+    $("#bookmarks").children().each(function () {
+        var tag = $(this).attr("title");
+        if (typeof tag !== 'undefined')
+        {
+            var tagsStripped = $(this).html().replace(/<ul><li>.*<\/li><\/ul>/, "\n");
+            $(this).html(tagsStripped);
+        }
+    });
+}
+
+/**
+ * Sort the items in the UL which contains our bookmarks.
+ */
+function sortBookmarks() {
+    var mylist = $('#bookmarks');
+    var listitems = mylist.children('li').get();
+    listitems.sort(function (a, b) {
+        return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
+    });
+    $.each(listitems, function (idx, itm) {
+        mylist.append(itm);
+    });
+}
+
+/**
+ * Update the visible bookmarks by the value of the window location-hash
+ */
+function loadByHash() {
+
+    if (typeof window.location.hash !== 'string' || window.location.hash.length === 0)
+    {
+        clearFilter();
+        return;
+    }
+    var tag = window.location.hash.substring(1);
+    $("#bookmarks").children().each(function () {
+        var tags = $(this).attr('title');
+        ((typeof tags !== 'undefined') && (tags.toLowerCase().match(decodeURIComponent(tag))))
+            ? $(this).show() : $(this).hide();  // decodeURIComponent needed to handle special chars in tags
+    });
+    updateTitle();
+}
+
+
+/**
+ * Code the launches at page-load-time:
+ */
+$(function () {
+
+    /** Sort the bookmarks */
+    sortBookmarks();
+
+    /** Populate the tags pane. */
+    populateTags();
+
+    /** Focus on the search/filter box. */
+    $("#fill").focus();
+
+    /**
+     * Bind event handlers...
+     */
+    window.onhashchange = function () {
+        loadByHash();
+    };
+
+    /**
+     * Search by title/url - case insensitive.
+     */
+    $("#fill").keyup(function () {
+        /** Get the filter-string and return if it is empty */
+        filter = $("#fill").val().toLowerCase();
+        if ( filter.length < 1 ) { return ; }
+
+        $("#bookmarks").children().each(function () {
+            var title = $(this).text().toLowerCase();
+            var links = $(this).find("a");
+            if (typeof links !== 'undefined')
             {
-                $("#bookmarks").children().each(function () {
-                    var tag = $(this).attr("title");
-                    if (typeof tag !== 'undefined')
-                    {
-                        var tagsStripped = $(this).html().replace(/<ul><li>.*<\/li><\/ul>/, "\n");
-                        $(this).html(tagsStripped);
-                    }
-                });
+                links = links.attr("href").toLowerCase();
             }
-
-            $(function () {
-                /**
-                 * Sort the items in the UL which contains our bookmarks.
-                 */
-                function sortBookmarks()
-                {
-                    var mylist = $('#bookmarks');
-                    var listitems = mylist.children('li').get();
-                    listitems.sort(function (a, b) {
-                        return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
-                    });
-                    $.each(listitems, function (idx, itm) {
-                        mylist.append(itm);
-                    });
-                }
+            (title.match(filter) || links.match(filter) || filter === "")
+                ? $(this).show() : $(this).hide();
+        });
+        updateTitle();
+    });
 
 
-                /**
-                 * Code the launches at page-load-time:
-                 */
-
-                /** Sort the bookmarks */
-                sortBookmarks();
-
-                /** Populate the tags pane. */
-                populateTags();
-
-                // Focus on the search/filter box.
-                $("#fill").focus();
-
-                /**
-                 * Bind event handlers...
-                 */
-                /**
-                 * take the anchor (aka hash) and use it as filter to
-                 * show only entries with a given tag
-                 */
-                window.onhashchange = function () {
-                    if (typeof window.location.hash !== 'string' || window.location.hash.length === 0)
-                    {
-                        clearFilter();
-                        return;
-                    }
-
-                    var tag = window.location.hash.substring(1);
-                    $("#bookmarks").children().each(function () {
-                        var tags = $(this).attr('title');
-                        ((typeof tags !== 'undefined') && (tags.toLowerCase().match(decodeURIComponent(tag))))
-                                ? $(this).show() : $(this).hide();  // decodeURIComponent needed to handle special chars in tags
-                    });
-                    updateTitle();
-                };
-
-                /**
-                 * Search by title/url - case insensitive.
-                 */
-                $("#fill").keyup(function () {
-                    filter = $("#fill").val().toLowerCase();
-
-                    $("#bookmarks").children().each(function () {
-                        var title = $(this).text().toLowerCase();
-                        var links = $(this).find("a");
-                        if (typeof links !== 'undefined')
-                        {
-                            links = links.attr("href").toLowerCase();
-                        }
-                        (title.match(filter) || links.match(filter) || filter === "")
-                                ? $(this).show() : $(this).hide();
-                    });
-                    updateTitle();
-                });
-
-
-                /**
-                 * Show only entries with zero tags.
-                 */
-                $('#untagged').click(function (event) {
-                    event.preventDefault();
-                    $("#bookmarks").children().each(function () {
-                        var tags = $(this).attr('title');
-                        (typeof tags !== 'undefined') ? $(this).hide() : $(this).show();
-                    });
-                    updateTitle();
-                });
-            });
+    /**
+     * Show only entries with zero tags.
+     */
+    $('#untagged').click(function (event) {
+        event.preventDefault();
+        $("#bookmarks").children().each(function () {
+            var tags = $(this).attr('title');
+            (typeof tags !== 'undefined') ? $(this).hide() : $(this).show();
+        });
+        updateTitle();
+    });
+});
 -->
         </script>
         <style type="text/css">
