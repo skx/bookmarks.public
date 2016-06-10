@@ -1,0 +1,211 @@
+#!/usr/bin/perl
+
+=head1 NAME
+
+bookmark-utils - A utility script for working with bookmarks.
+
+=cut
+
+=head1 SYNOPSIS
+
+  bookmark-utils mode
+
+
+  Modes are:
+
+   404     - Poll each bookmark and report on states
+   dump    - Show the parsed bookamarks, titles, and tags.
+   domains - Show the most popular domains in the bookmarks
+   dupes   - Show duplicate URLs
+
+=cut
+
+=head1 ABOUT
+
+This script contains a couple of utility functions for checking on
+the bookmarks:
+
+=over 8
+
+=item c<404>
+Use the L<LWP::UserAgent> module to fetch each bookmark, and report on
+success or failure.
+
+=item c<domains>
+Report on the most bookmarked domain-names.  This is useful to find
+potential new tags (for example "wikipedia" might become an obvious
+tag to add, if you have many links pointing there).
+
+=item c<dupes>
+Report on any URL which is bookmarked more than once, which might
+happen if you merge bookmarks from multiple sources.
+
+=back
+
+=cut
+
+=head1 LICENSE
+
+This module is free software; you can redistribute it and/or modify it
+under the terms of either:
+
+a) the GNU General Public License as published by the Free Software
+Foundation; either version 2, or (at your option) any later version,
+or
+
+b) the Perl "Artistic License".
+
+=cut
+
+=head1 AUTHOR
+
+Steve Kemp <steve@steve.org.uk>
+
+=cut
+
+
+use strict;
+use warnings;
+
+use Data::Dumper;
+use Getopt::Long;
+use LWP::UserAgent;
+
+
+
+#
+#  Get the mode
+#
+my $mode = shift || undef;
+if ( ( !defined($mode) ) ||
+     ( $mode !~ /^(404|dump|dupes|domains)$/i ) )
+{
+    print <<EOF;
+Usage: $0 [404|dupes|domains]
+EOF
+    exit(1);
+}
+
+#
+#  Parse the bookmarks
+#
+my @bookmarks = parse_bookmarks();
+
+if ( $mode =~ /dump/i )
+{
+    print Dumper( \@bookmarks );
+    exit(0);
+}
+if ( $mode =~ /dupes/i )
+{
+    my %seen;
+    foreach my $entry (@bookmarks)
+    {
+        $seen{ $entry->{ 'link' } } += 1;
+    }
+    foreach my $link ( keys %seen )
+    {
+        print $link . "\n" if ( $seen{ $link } > 1 );
+    }
+    exit 0;
+}
+
+if ( $mode =~ /domains/i )
+{
+    my %domains;
+
+    foreach my $entry (@bookmarks)
+    {
+        my $link = $entry->{ 'link' };
+        if ( $link =~ /:\/\/([^\/]+)\// )
+        {
+            $domains{ $1 } += 1;
+        }
+    }
+    foreach
+      my $dom ( sort {$domains{ $a } <=> $domains{ $b }} ( keys %domains ) )
+    {
+        print( sprintf( "%4d - %s\n", $domains{ $dom }, $dom ) );
+    }
+    exit 0;
+
+    exit 0;
+}
+
+if ( $mode =~ /404/ )
+{
+    my $ua = LWP::UserAgent->new;
+    $ua->agent(
+        "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0"
+    );
+    $ua->timeout(10);
+    $ua->env_proxy;
+
+    foreach my $entry (@bookmarks)
+    {
+        my $link = $entry->{ 'link' };
+
+        next unless ( $link =~ /^https?:/ );
+
+        my $response = $ua->get($link);
+
+        if ( $response->is_success )
+        {
+            print "OK  $link\n";
+        }
+        else
+        {
+            print "ERR $link - " . $response->status_line() . "\n";
+        }
+    }
+    exit(0);
+
+}
+print "Unknown mode\n";
+exit 1;
+
+
+
+=begin doc
+
+Parse the bookmarks into an array of hashes, containing the links,
+titles, and tags.
+
+=end doc
+
+=cut
+
+sub parse_bookmarks
+{
+    my @bookmarks;
+
+    my $file = "index.html";
+    $file = "bookmarks.html" if ( -e "bookmarks.html" );
+
+    open( my $handle, "<", $file ) or
+      die "Failed to open $!";
+    while ( my $line = <$handle> )
+    {
+        chomp($line);
+
+        if ( $line =~ /<li(.*)><a href="([^"]+)">([^<]+)</ )
+        {
+            my $tags  = $1;
+            my $link  = $2;
+            my $title = $3;
+
+            if ( $tags =~ /="([^"]+)"/ )
+            {
+                $tags = $1;
+            }
+            push( @bookmarks,
+                  {  tags  => $tags,
+                     link  => $link,
+                     title => $title
+                  } );
+        }
+    }
+    close($handle);
+
+    return (@bookmarks);
+}
