@@ -3,7 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>My Bookmarks</title>
-        <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script
+			  src="https://code.jquery.com/jquery-3.0.0.min.js"
+			  integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
+			  crossorigin="anonymous"></script>
         <script type="text/javascript">
     <!--
             /**
@@ -16,12 +19,33 @@
                 updateTitle();
             }
 
+
+            /**
+             * Show 25 random bookmarks
+             */
+            function showRandom() {
+                $("#bookmarks").children().each(function () {
+                    $(this).hide();
+                });
+
+                var links = $('#bookmarks').children(),
+                len = links.length, random, i, $a;
+
+                max = Math.min( 25, len )
+                for (i = 0; i < max; i++) {
+                   random = Math.floor(Math.random() * links.length);
+                   $a = links.eq(random).show();
+                   links = links.not($a)
+                }
+            }
+
+
             /**
              * Show the number of visible bookmarks in the titlebar.
              */
             function updateTitle()
             {
-                var count = $("#bookmarks").children().filter(":visible").size();
+                var count = $("#bookmarks li:visible").length;
                 var plural = ((count === 0) || (count > 1)) ? 's' : '';
                 document.title = count + " visible bookmark" + plural;
             }
@@ -327,7 +351,9 @@
                         </p>
                         <p>
                             <input type="checkbox" name="TagsCheck" id="TagsCheck" value="ShowTags" onclick="toggleTags()"/>Show Tags
-                            <button title="Show all bookmarks" type="button" onclick="clearFilter()">Show All</button>
+                            <button title="Show all bookmarks" type="button" onclick="clearFilter();">Show All</button>
+                            <button title="Show 25 random bookmarks" type="button" onclick="showRandom();">Show Random</button>
+
                         </p>
                     </fieldset>
                     <p> </p>
