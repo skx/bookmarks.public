@@ -8,13 +8,12 @@ bookmark-utils - A utility script for working with bookmarks.
 
 =head1 SYNOPSIS
 
-  bookmark-utils mode
-
+  bookmark-utils mode [args]
 
   Modes are:
 
    404     - Poll each bookmark and report on states
-   dump    - Show the parsed bookamarks, titles, and tags.
+   dump    - Show the parsed bookmarks, titles, and tags.
    domains - Show the most popular domains in the bookmarks
    dupes   - Show duplicate URLs
 
@@ -35,6 +34,10 @@ success or failure.
 Report on the most bookmarked domain-names.  This is useful to find
 potential new tags (for example "wikipedia" might become an obvious
 tag to add, if you have many links pointing there).
+
+=item c<dump [pattern]>
+Show all bookmarks, if a pattern is specified it will be used to
+filter the output to include only matching entries.
 
 =item c<dupes>
 Report on any URL which is bookmarked more than once, which might
@@ -93,7 +96,27 @@ my @bookmarks = parse_bookmarks();
 
 if ( $mode =~ /dump/i )
 {
-    print Dumper( \@bookmarks );
+    my $arg = shift;
+
+    #
+    #  Show each bookmark
+    #
+    foreach my $ent (@bookmarks)
+    {
+        if ($arg)
+        {
+            if ( ( $ent->{ 'title' } =~ /$arg/i ) ||
+                 ( $ent->{ 'link' } =~ /$arg/i ) ||
+                 ( $ent->{ 'tags' } && ( $ent->{ 'tags' } =~ /$arg/i ) ) )
+            {
+                print Dumper( \$ent );
+            }
+        }
+        else
+        {
+            print Dumper( \$ent );
+        }
+    }
     exit(0);
 }
 if ( $mode =~ /dupes/i )
@@ -179,8 +202,7 @@ sub parse_bookmarks
 {
     my @bookmarks;
 
-    my $file = "index.html";
-    $file = "bookmarks.html" if ( -e "bookmarks.html" );
+    my $file = "bookmarks.data";
 
     open( my $handle, "<", $file ) or
       die "Failed to open $!";
