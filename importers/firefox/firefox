@@ -1,0 +1,57 @@
+#!/usr/bin/perl
+#
+# This script processes the file `bookmarks.html` which it is assumed
+# you've exported from Firefox
+#
+# It will produce output which can be copied/pasted into the template,
+# complete with tag information where it is available.
+#
+
+use strict;
+use warnings;
+
+
+my $file = shift || "bookmarks.html";
+
+if ( ! -e $file )
+{
+    print "The expected input-file $file doesn't exist!\n";
+    exit(1);
+}
+
+
+#
+#  Open the file
+#
+open( my $handle, "<", $file ) or die "Failed to open file $file -$!";
+
+while( my $line = <$handle> )
+{
+    chomp( $line );
+
+
+    #
+    # Does this looke like a bookmark?
+    #
+    if ( $line =~ /<dt><a href="([^"]+)".*>([^<]+)<\/a>/i )
+    {
+        my $link = $1;
+        my $title = $2;
+
+        my $tags = "";
+        if ( $line =~ / tags="([^"]+)"/i )
+        {
+            $tags = $1;
+        }
+
+        if ( length( $tags ) )
+        {
+            $tags = " title=\"$tags\"";
+        }
+        print "<li$tags><a href=\"$link\">$title</a></li>\n";
+    }
+
+}
+
+close( $handle );
+exit(0);
