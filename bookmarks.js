@@ -14,6 +14,17 @@ function clearFilter() {
     updateTitle();
 }
 
+/**
+ * Show only entries with zero tags.
+ */
+function showUntagged() {
+    $("#bookmarks").children().each(function () {
+        var tags = $(this).attr('title');
+        (typeof tags !== 'undefined') ? $(this).hide() : $(this).show();
+    });
+    updateTitle();
+}
+
 
 /**
  * Show 25 random bookmarks
@@ -263,19 +274,6 @@ function setup () {
                 }
                 (title.match(filter) || links.match(filter) || filter === "")
                     ? $(this).show() : $(this).hide();
-            });
-            updateTitle();
-        });
-
-
-        /**
-         * Show only entries with zero tags.
-         */
-        $('#untagged').click(function (event) {
-            event.preventDefault();
-            $("#bookmarks").children().each(function () {
-                var tags = $(this).attr('title');
-                (typeof tags !== 'undefined') ? $(this).hide() : $(this).show();
             });
             updateTitle();
         });
