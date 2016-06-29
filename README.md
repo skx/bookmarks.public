@@ -1,13 +1,12 @@
 bookmarks.public
 ================
 
-This repository contains the single HTML file `index.html`.
+This repository allows you to save your bookmarks under revision control,
+via a simple combination of HTML & Javascript.
 
-The bookmarks file is a template which is designed to be edited by the user,
-replacing the bookmarks in the single unordered-list with their own.
-
-The bookmarks file contains some simple javascript which should allow simple
-navigtation and interactive use of the bookmarks, when opened via a browser.
+Add your bookmark-data to the file `bookmarks.data` and view them via the
+file `index.html`, which contains some simple javascript which should allow simple
+navigtation and interactive use of the bookmarks, when opened.
 
 
 Online Demo
@@ -22,7 +21,7 @@ Rationale
 I didn't like any of the online bookmark-syncing plugins/addins/tools I tested.
 
 The idea of hosting an online bookmark server is appealing, but using the
-power of Git it seems that having a local bookmark file should be pretty robust:
+power of `git` it seems that having a local bookmark file should be pretty robust:
 
  * New items are added, generally one per line.
  * Existing items can be edited to add new tags.
