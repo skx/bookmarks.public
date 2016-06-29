@@ -9,6 +9,11 @@
 			  crossorigin="anonymous"></script>
         <script type="text/javascript">
     <!--
+           /**
+             * Default to showing tags.
+             */
+           tagsVisible = true;
+
             /**
              * Show all bookmarks
              */
@@ -124,12 +129,12 @@
             }
 
             function toggleTags() {
-                var checkbox = document.getElementById("TagsCheck");
-                if (checkbox.checked === true) {
-                    appendTags();
-                }
-                else {
+                if ( tagsVisible == false ) {
+                    showTags();
+                    tagsVisible = true;
+                } else {
                     hideTags();
+                    tagsVisible = false;
                 }
             }
 
@@ -153,19 +158,6 @@
                 entry.append(txt + "</li></ul>");
             }
 
-
-            /**
-             * Toggles the visibility of the tags below the links
-             */
-            function toggleTags() {
-                var checkbox = document.getElementById("TagsCheck");
-                if (checkbox.checked === true) {
-                    showTags();
-                }
-                else {
-                    hideTags();
-                }
-            }
 
             /**
              * Append the list of tags beneath each bookmark, for easy viewing.
@@ -242,6 +234,9 @@
                 /** Focus on the search/filter box. */
                 $("#fill").focus();
 
+                if ( tagsVisible ) {
+                showTags();
+                }
                 /**
                  * take the anchor (aka hash) and use it as filter to
                  * show only entries with a given tag
@@ -350,7 +345,7 @@
                             <a title="Show untagged bookmarks" href="#untagged" id="untagged">untagged</a>
                         </p>
                         <p>
-                            <input type="checkbox" name="TagsCheck" id="TagsCheck" value="ShowTags" onclick="toggleTags()"/>Show Tags
+                            <button title="Toggle display of tags" type="button" onclick="toggleTags();">Toggle Tags</button>
                             <button title="Show all bookmarks" type="button" onclick="clearFilter();">Show All</button>
                             <button title="Show 25 random bookmarks" type="button" onclick="showRandom();">Show Random</button>
 
