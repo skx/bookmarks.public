@@ -51,7 +51,7 @@ function showRandom() {
  */
 function updateTitle()
 {
-    var count = $("#bookmarks li:visible").length;
+    var count = $("#bookmarks > li:visible").length;
     var plural = ((count === 0) || (count > 1)) ? 's' : '';
     document.title = count + " visible bookmark" + plural;
 }
