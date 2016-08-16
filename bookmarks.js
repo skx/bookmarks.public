@@ -125,7 +125,7 @@ function populateTags()
     $("#autotags").html("");
     for (t in cleanKeys)
     {
-        $("#autotags").append("<a class=\"tagfilter\" href=\"#" + escape(cleanKeys[t]) + "\">" + cleanKeys[t] + "</a>, ");
+        $("#autotags").append("<a class=\"tagfilter\" href=\"#" + encodeURIComponent(cleanKeys[t]) + "\">" + cleanKeys[t] + "</a>, ");
     }
 
     /** Remove trailing ", ". */
@@ -158,7 +158,7 @@ function decorate(entry, tag) {
     {
         var nm = array[i];
         nm = nm.replace(/(^\s+|\s+$)/g, '');
-        txt += "<a class=\"tagfilter\" href=\"#" + escape(nm) + "\">" + nm + "</a>, ";
+        txt += "<a class=\"tagfilter\" href=\"#" + encodeURIComponent(nm) + "\">" + nm + "</a>, ";
     }
 
     /** Remove trailing ", ". */
@@ -225,7 +225,7 @@ function updateView()
     $("#bookmarks").children().each(function () {
         var tags = $(this).attr('title');
         ((typeof tags !== 'undefined') && (tags.toLowerCase().match(decodeURIComponent(tag))))
-            ? $(this).show() : $(this).hide();  // decodeURIComponent needed to handle special chars in tags
+            ? $(this).show() : $(this).hide();
     });
     updateTitle();
 }
