@@ -293,6 +293,8 @@ function saveDataFile() {
     var tagsVisibleWas = tagsVisible;
     if(tagsVisibleWas)
         toggleTags();
+
+    $("#bookmarks li").removeAttr("style");
     var text = $("#bookmarks").html();
 
     // beautify text
@@ -314,6 +316,7 @@ function saveDataFile() {
 
     if(tagsVisibleWas)
         toggleTags();
+    updateView();
 }
 
 /**
