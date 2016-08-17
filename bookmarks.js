@@ -293,29 +293,25 @@ function saveDataFile() {
     var tagsVisibleWas = tagsVisible;
     if(tagsVisibleWas)
         toggleTags();
-  
     var text = $("#bookmarks").html();
-  
+
     // beautify text
     text = text.trim().replace(/[\n\r]+/g, "").replace(/<\/li><li/g, "</li>\n<li");
 
-    // below code was inspired by TiddlyWiki  
-    var link = document.createElement("a");
+    // below code was inspired by TiddlyWiki
+    var a = $('<a target="_blank" />').appendTo('body');
     var filename = "bookmarks.data";
-  
-    link.setAttribute("target","_blank");
-    link.setAttribute("rel","noopener noreferrer");
+
     if(Blob !== undefined) {
         var blob = new Blob([text], {type: "text/html"});
-        link.setAttribute("href", URL.createObjectURL(blob));
+        a.attr("href", URL.createObjectURL(blob));
     } else {
-        link.setAttribute("href","data:text/html," + encodeURIComponent(text));
+        a.attr("href","data:text/html," + encodeURIComponent(text));
     }
-    link.setAttribute("download",filename);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  
+    a.attr("download",filename);
+    a.get(0).click(); // probably there is better way to do it
+    a.remove();
+
     if(tagsVisibleWas)
         toggleTags();
 }
