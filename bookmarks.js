@@ -74,8 +74,7 @@ function addBookmark() {
         var tag = $(this).attr("title");
         if (id === "newOne")
         {
-            var checkbox = document.getElementById("TagsCheck");
-            if (checkbox.checked === true) {
+            if (tagsVisible) {
                 decorate($(this), tag);
             }
             $(this).removeAttr("id");
