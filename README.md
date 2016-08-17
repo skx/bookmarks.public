@@ -44,9 +44,9 @@ clone the repository somewhere private.
 ### Saving
 
 `bookmarks.data` file contains all the bookmarks. Once you add some bookmarks,
-you can click "Save..." button. It will cause browser to offer you to save the
+you can click **Save...** button. It will cause browser to offer you to save the
 file named `bookmarks.data`. To update current database, please overwrite
-`bookmarks.data` placed in the same folder as `HTML` file with bookmarks.
+`bookmarks.data` placed in the same folder as `index.html` which you use to view bookmarks.
 
 Contributing
 ------------
