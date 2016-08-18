@@ -41,6 +41,12 @@ to be public, then just fork [this repository](https://github.com/skx/bookmarks.
 If you prefer to keep your bookmarks private, as I do, then you'll need to
 clone the repository somewhere private.
 
+### Saving
+
+`bookmarks.data` file contains all the bookmarks. Once you add some bookmarks,
+you can click **Save...** button. It will cause browser to offer you to save the
+file named `bookmarks.data`. To update current database, please overwrite
+`bookmarks.data` placed in the same folder as `index.html` which you use to view bookmarks.
 
 Contributing
 ------------

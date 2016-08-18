@@ -286,6 +286,40 @@ function setup () {
 }
 
 /**
+ * This function saves bookmark data.
+ * It hides tags temporarily then shows them if needed.
+ */
+function saveDataFile() {
+    var tagsVisibleWas = tagsVisible;
+    if(tagsVisibleWas)
+        toggleTags();
+
+    $("#bookmarks li").removeAttr("style");
+    var text = $("#bookmarks").html();
+
+    // beautify text
+    text = text.trim().replace(/[\n\r]+/g, "").replace(/<\/li><li/g, "</li>\n<li");
+
+    // below code was inspired by TiddlyWiki
+    var a = $('<a target="_blank" />').appendTo('body');
+    var filename = "bookmarks.data";
+
+    if(Blob !== undefined) {
+        var blob = new Blob([text], {type: "text/html"});
+        a.attr("href", URL.createObjectURL(blob));
+    } else {
+        a.attr("href","data:text/html," + encodeURIComponent(text));
+    }
+    a.attr("download",filename);
+    a.get(0).click(); // probably there is better way to do it
+    a.remove();
+
+    if(tagsVisibleWas)
+        toggleTags();
+    updateView();
+}
+
+/**
  * Setup our state.
  */
 setup();
