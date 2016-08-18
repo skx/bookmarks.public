@@ -1,73 +1,73 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"
-    "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+          "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-      <title>My Bookmarks</title>
-      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-      <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
-      <script type="text/javascript">
-//
-// Load an external script.  This is required such that when opening this page as file:///.../index.html we get our external javascript.
-//
-function loadScript(url){
-    var script = document.createElement("script")
-    script.type = "text/javascript";
-    script.src = url;
-    document.getElementsByTagName("head")[0].appendChild(script);
-}
+  <head>
+    <title>My Bookmarks</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+     //
+     // Load an external script.  This is required such that when opening this page as file:///.../index.html we get our external javascript.
+     //
+     function loadScript(url){
+       var script = document.createElement("script")
+       script.type = "text/javascript";
+       script.src = url;
+       document.getElementsByTagName("head")[0].appendChild(script);
+     }
 
-//
-// jQuery is loaded - load our external script.
-//
-$(function () {
-   loadScript("bookmarks.js");
-});
-</script>
+     //
+     // jQuery is loaded - load our external script.
+     //
+     $(function () {
+       loadScript("bookmarks.js");
+     });
+    </script>
     <link rel="StyleSheet" HREF="bookmarks.css" type="text/css" media="screen"/>
-    </head>
-    <body>
-        <table id="layout">
-            <tr>
-                <td rowspan="1" valign="top">
-                    <!-- THE BOOKMARKS -->
-                    <ul class="bookmarks" id="bookmarks">
-                    </ul>
-                    <!-- THE END OF BOOKMARKS -->
-                </td>
-                <td id="tags" valign="top">
-                    <fieldset>
-                        <legend><b>Tags</b></legend>
-                        <p id="autotags">
-                        </p>
-                        <p>
-                            <button title="Toggle display of tags" type="button" onclick="toggleTags();">Toggle Tags</button>
-                            <button title="Show all bookmarks" type="button" onclick="clearFilter();">Show All</button>
-                            <button title="Show only bookmarks with no tags" type="button" onclick="showUntagged();">Show Untagged</button>
-                            <button title="Show 25 random bookmarks" type="button" onclick="showRandom();">Show Random</button>
+  </head>
+  <body>
+    <table id="layout">
+      <tr>
+        <td rowspan="1" valign="top">
+          <!-- THE BOOKMARKS -->
+          <ul class="bookmarks" id="bookmarks">
+          </ul>
+          <!-- THE END OF BOOKMARKS -->
+        </td>
+        <td id="tags" valign="top">
+          <fieldset>
+            <legend><b>Tags</b></legend>
+            <p id="autotags">
+            </p>
+            <p>
+              <button title="Toggle display of tags" type="button" onclick="toggleTags();">Toggle Tags</button>
+              <button title="Show all bookmarks" type="button" onclick="clearFilter();">Show All</button>
+              <button title="Show only bookmarks with no tags" type="button" onclick="showUntagged();">Show Untagged</button>
+              <button title="Show 25 random bookmarks" type="button" onclick="showRandom();">Show Random</button>
 
-                        </p>
-                    </fieldset>
-                    <p> </p>
-                    <fieldset>
-                        <legend><b>Filter Bookmarks </b></legend>
-                        <form id="filter" name="filter" action="#">
-                            <p>Search within bookmarks: <input type="text" name="fill" id="fill" value="" size="50" /></p>
-                        </form>
-                    </fieldset>
-                    <p> </p>
-                    <fieldset>
-                        <legend><b>Add Bookmark </b></legend>
-                        <form id="newForm" name="newForm">
-                          <table id="add_bookmark" border="0" cellspacing="2" cellpadding="2">
-                            <tr><td>Name:</td><td><input type="text" name="newname" id="newName" value="" size="50" /></td></tr>
-                            <tr><td>Link:</td><td><input type="text" name="newLink" id="newLink" value="" size="50" /></td></tr>
-                            <tr><td>Tags:</td><td><input type="text" name="newTags" id="newTags" value="" size="50" /></</td></tr>
-                            <tr><td colspan="2" style="text-align:right"><button type="button" onclick="addBookmark()">Add</button>  <button type="button" onclick="saveDataFile()">Save...</button></td></tr>
-                          </table>
-                        </form>
-                    </fieldset>
-                </td>
-            </tr>
-        </table>
-    </body>
+            </p>
+          </fieldset>
+          <p> </p>
+          <fieldset>
+            <legend><b>Filter Bookmarks </b></legend>
+            <form id="filter" name="filter" action="#">
+              <p>Search within bookmarks: <input type="text" name="fill" id="fill" value="" size="50" /></p>
+            </form>
+          </fieldset>
+          <p> </p>
+          <fieldset>
+            <legend><b>Add New Bookmark </b></legend>
+            <form id="newForm" name="newForm">
+              <table id="add_bookmark" border="0" cellspacing="2" cellpadding="2">
+                <tr><td>Name:</td><td><input type="text" name="newname" id="newName" value="" size="50" /></td></tr>
+                <tr><td>Link:</td><td><input type="text" name="newLink" id="newLink" value="" size="50" /></td></tr>
+                <tr><td>Tags:</td><td><input type="text" name="newTags" id="newTags" value="" size="50" /></</td></tr>
+                <tr><td colspan="2" style="text-align:right"><button type="button" onclick="addBookmark()">Add</button>  <button type="button" onclick="saveDataFile()">Save...</button></td></tr>
+              </table>
+            </form>
+          </fieldset>
+        </td>
+      </tr>
+    </table>
+  </body>
 </html>
