@@ -15,7 +15,11 @@
                 width: 100%;
                 padding: 1em;
             }
-            td {
+            #layout td {
                 padding: 0.5em;
                 border: 1px solid silver;
+            }
+            #add_bookmark td {
+                padding: 0.5em;
+                border: 0px solid red;
             }
