@@ -63,6 +63,12 @@ function addBookmark() {
     var name = $("#newName").val();
     var link = $("#newLink").val();
     var tags = $("#newTags").val();
+
+    // If the name or link is empty then ignore.
+    if ( ( ! name ) || ( ! link ) ) {
+        return;
+    }
+
     var current = document.getElementById("bookmarks").innerHTML;
     var entry = '<li id="newOne" title="' + tags + '"><a href="' + link + '">' + name + '</a></li>';
     current = current + entry;
@@ -74,7 +80,7 @@ function addBookmark() {
         var tag = $(this).attr("title");
         if (id === "newOne")
         {
-            if (tagsVisible) {
+            if (tagsVisible && tag) {
                 decorate($(this), tag);
             }
             $(this).removeAttr("id");
@@ -116,7 +122,8 @@ function populateTags()
     var keys = [];
     for (var t in tags)
     {
-        keys.push(t);
+        if( t )
+            keys.push(t);
     }
 
     var cleanKeys = $.unique(keys); // remove duplicate tags
