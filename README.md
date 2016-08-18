@@ -2,17 +2,17 @@ bookmarks.public
 ================
 
 This repository allows you to save your bookmarks under revision control,
-via a simple combination of HTML & Javascript.
+via a simple combination of HTML, CSS & Javascript.
 
-Add your bookmark-data to the file `bookmarks.data` and view them via the
-file `index.html`, which contains some simple javascript which should allow simple
-navigtation and interactive use of the bookmarks, when opened.
+* You add your bookmarks to the file `bookmarks.data`.
+* Then view them by opening `index.html` in your browser.
+     * This uses `bookmarks.css` to style them, and `bookmarks.js` to make them interactive.
 
 
 Online Demo
 -----------
 
-You may [try out the interface](http://www.steve.org.uk/Software/bookmarks/bookmarks.public/) as the sample page contains a small number of (tagged) bookmarks.
+You may try out the interface [in this online demo](http://www.steve.org.uk/Software/bookmarks/bookmarks.public/).
 
 
 Rationale
@@ -27,9 +27,9 @@ power of `git` it seems that having a local bookmark file should be pretty robus
  * Existing items can be edited to add new tags.
  * Merges should be painless.
 
-The included javascript magic is present solely to make the bookmarks manageable,
-in my private copy I have 400+ bookmarks and with the tagging support present here
-they will continue to work for me easily.
+The included javascript magic is present solely to make the bookmarks
+manageable, in my private copy I have 400+ bookmarks and with the
+tagging support present here they will continue to work for me easily.
 
 
 Using
@@ -41,19 +41,29 @@ to be public, then just fork [this repository](https://github.com/skx/bookmarks.
 If you prefer to keep your bookmarks private, as I do, then you'll need to
 clone the repository somewhere private.
 
-### Saving
 
-`bookmarks.data` file contains all the bookmarks. Once you add some bookmarks,
-you can click **Save...** button. It will cause browser to offer you to save the
-file named `bookmarks.data`. To update current database, please overwrite
-`bookmarks.data` placed in the same folder as `index.html` which you use to view bookmarks.
+Adding bookmarks via the browser
+--------------------------------
+
+The bookmarks are all stored in the standalone file `bookmarks.data`, and
+the expected use-case is that you edit that with your favourite editor.
+
+However you may also add bookmarks dynamically, via your browser.  Just
+complete the form on the right-side of the interface.  Newly added bookmarks
+will be available for you to view immediately, however they will not be
+saved by default.
+
+To make your new additions permanent you must click `Save` and overwrite
+your local `bookmarks.data` file with the updated version.
+
 
 Contributing
 ------------
 
-If you wish to submit improvements to the javascript code, or layout, then I welcome forks & pull requests.
+If you wish to submit improvements to the javascript code, or layout, then
+I welcome forks & pull requests.
 
-(If you submit a change feel free to add a link to your homepage/blog/whatever as part of that.  The sample bookmarks are only samples.)
+>**NOTE**: If you submit a change feel free to add a link to your homepage/blog/whatever as part of that.  The included bookmarks are only examples.
 
 Steve
 --
