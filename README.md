@@ -48,6 +48,16 @@ you can click **Save...** button. It will cause browser to offer you to save the
 file named `bookmarks.data`. To update current database, please overwrite
 `bookmarks.data` placed in the same folder as `index.html` which you use to view bookmarks.
 
+### Adding / Editing / Removing
+
+**Add bookmark** form allows you to add new bookmark with name, link and comma-separated tags.
+
+When moving mouse over existing bookmark, you can either click *recycle icon* to delete it or
+*pencil icon* to edit it.
+
+Editing works just as adding new bookmark. It even happens in the same form, which temporary
+switches to editing mode. Editing replaces existing bookmark you selected before.
+
 Contributing
 ------------
 

@@ -56,12 +56,14 @@ $(function () {
                     </fieldset>
                     <p> </p>
                     <fieldset>
-                        <legend><b>Add Bookmark </b></legend>
+                        <legend><b><span class="whenadd">Add</span><span class="whenedit">Edit</span> Bookmark </b></legend>
                         <form id="newForm" name="newForm">
                             <p>Name: <input type="text" name="newname" id="newName" value="" size="50" /></p>
                             <p>Link: <input type="text" name="newLink" id="newLink" value="" size="50" /></p>
                             <p>Tags: <input type="text" name="newTags" id="newTags" value="" size="50" /></p>
-                            <button type="button" onclick="addBookmark()">Add</button>
+                            <button class="whenadd" type="button" onclick="addBookmark()">Add</button>
+                            <button class="whenedit" id="saveBookmark" type="button">Save</button>
+                            <button class="whenedit" type="button" onclick="doneEditBookmark()">Cancel</button>
                         </form>
                     </fieldset>
                     <p> </p>
