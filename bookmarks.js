@@ -88,6 +88,7 @@ function addBookmark() {
     });
     var form = document.getElementById("newForm");
     form.reset();
+    setupEditRemove();
 }
 
 /**
@@ -233,7 +234,72 @@ function updateView()
         ((typeof tags !== 'undefined') && (tags.toLowerCase().match(decodeURIComponent(tag))))
             ? $(this).show() : $(this).hide();
     });
+
     updateTitle();
+}
+
+/**
+ * Restore Add bookmark form back to new bookmark mode
+ * after saving editing results / canceling editing
+ */
+function doneEditBookmark () {
+    // cleanup form
+    $('#newName').val('');
+    $('#newLink').val('');
+    $('#newTags').val('');
+    // switch form to adding mode
+    $('.whenedit').hide();
+    $('.whenadd').show();
+}
+
+/**
+ * Switch Add bookmark form to editing mode
+ */
+function editBookmark (selector) {
+    // load form
+    $('#newName').val(selector.find('> a').html());
+    $('#newLink').val(selector.find('> a').attr('href'));
+    $('#newTags').val(selector.attr('title'));
+
+    // switch to editing mode
+    $('.whenadd').hide();
+    $('.whenedit').show();
+
+    $('#saveBookmark').off('click').one('click', function(){
+        // save form
+        selector.find('> a').html($('#newName').val());
+        selector.find('> a').attr('href', $('#newLink').val());
+        selector.attr('title', $('#newTags').val());
+        // update tags
+        toggleTags();
+        toggleTags();
+        // switch to adding mode
+        doneEditBookmark();
+    });
+}
+
+/**
+ * Setup edit / remove handlers
+ */
+function setupEditRemove () {
+    var li = $("#bookmarks > li");
+    li.mouseenter(function(){
+        var cli = $(this);
+        var clia = cli.find("> a");
+        var remove = $('<span class="context">&nbsp;&#9851;&nbsp;</span>').insertAfter(clia);
+        var edit = $('<span class="context">&nbsp;&#9998;&nbsp;</span>').insertAfter(clia);
+        edit.off('click').one('click', function(){
+            editBookmark(cli);
+        });
+        remove.off('click').one('click', function(){
+            if ( confirm( "Remove bookmark?" ) ) {
+                cli.remove();
+            }
+        });
+    });
+    li.mouseleave(function(){
+        $(this).find("span.context").remove();
+    });
 }
 
 /**
@@ -283,6 +349,8 @@ function setup () {
             });
             updateTitle();
         });
+
+        setupEditRemove();
 
         /*
          * Now update the view - in case we were loaded with a
