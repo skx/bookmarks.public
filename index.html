@@ -44,7 +44,6 @@
               <button title="Show all bookmarks" type="button" onclick="clearFilter();">Show All</button>
               <button title="Show only bookmarks with no tags" type="button" onclick="showUntagged();">Show Untagged</button>
               <button title="Show 25 random bookmarks" type="button" onclick="showRandom();">Show Random</button>
-
             </p>
           </fieldset>
           <p> </p>
@@ -56,13 +55,18 @@
           </fieldset>
           <p> </p>
           <fieldset>
-            <legend><b>Add New Bookmark </b></legend>
+            <legend><b><span class="whenadd">Add</span><span class="whenedit">Edit</span> Bookmark </b></legend>
             <form id="newForm" name="newForm">
               <table id="add_bookmark" border="0" cellspacing="2" cellpadding="2">
                 <tr><td>Name:</td><td><input type="text" name="newname" id="newName" value="" size="50" /></td></tr>
                 <tr><td>Link:</td><td><input type="text" name="newLink" id="newLink" value="" size="50" /></td></tr>
                 <tr><td>Tags:</td><td><input type="text" name="newTags" id="newTags" value="" size="50" /></</td></tr>
-                <tr><td colspan="2" style="text-align:right"><button type="button" onclick="addBookmark()">Add</button>  <button type="button" onclick="saveDataFile()">Save...</button></td></tr>
+
+                <tr><td colspan="2" style="text-align:right">
+                  <button class="whenadd" type="button" onclick="addBookmark()">Add</button>
+                  <button class="whenedit" id="saveBookmark" type="button">Save</button>
+                  <button class="whenedit" type="button" onclick="doneEditBookmark()">Cancel</button>
+                </td></tr>
               </table>
             </form>
           </fieldset>

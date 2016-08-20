@@ -57,6 +57,17 @@ To make your new additions permanent you must click `Save` and overwrite
 your local `bookmarks.data` file with the updated version.
 
 
+### Adding / Editing / Removing
+
+**Add Bookmark** form allows you to add new bookmark with name, link and comma-separated tags.
+
+When moving mouse over existing bookmark, you can either click *recycle icon* to delete it or
+*pencil icon* to edit it.
+
+Editing works just as adding new bookmark. It even happens in the same form, which temporary
+switches to editing mode (**Edit Bookmark** title and buttons to **Save** and **Cancel**).
+Editing replaces existing bookmark you selected before.
+
 Contributing
 ------------
 
