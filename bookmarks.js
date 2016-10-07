@@ -1,7 +1,7 @@
 /**
  * Default to showing tags.
  */
-tagsVisible = true;
+var tagsVisible = true;
 
 
 /**
