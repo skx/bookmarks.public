@@ -11,6 +11,7 @@ function clearFilter() {
     $("#bookmarks").children().each(function () {
         $(this).show();
     });
+    updateRelatedTags();
     updateTitle();
 }
 
@@ -43,6 +44,73 @@ function showRandom() {
         $a = links.eq(random).show();
         links = links.not($a)
     }
+}
+
+
+/**
+* Poplate the "related tags" area.
+*/
+function updateRelatedTags(tag)
+{
+    /*
+     * For each bookmark - add the tags used if it contains the
+     * currently selected tag.
+     */
+    var avail = "";
+    $("#bookmarks").children().each(function () {
+        var tags = $(this).attr('title');
+        if ((typeof tags !== 'undefined') && (tags.toLowerCase().match(decodeURIComponent(tag))))
+        {
+            avail += "," + tags;
+        }
+    });
+
+    /*
+     * Split into an array, and downcase.
+     */
+    var tags = {};
+    var a = avail.split(",");
+    for (var i in a)
+    {
+        var nm = a[i];
+        nm = nm.replace(/(^\s+|\s+$)/g, '');
+        tags[ nm.toLowerCase() ] = 1;
+    }
+
+    /*
+     * Unique and sort.
+     */
+    var keys = [];
+    for (var t in tags)
+    {
+        if( t )
+            keys.push(t);
+    }
+    var cleanKeys = $.unique(keys);
+    cleanKeys.sort();
+
+    /*
+     * If there is only one tag then we have no related tags
+     * so we hide the region and return.
+     */
+    if (cleanKeys.length < 2) {
+        $("#related_holder").hide()
+        return;
+    } else {
+        $("#related_holder").show()
+    }
+    /*
+     * Now show the tags.
+     */
+    $("#related").html("");
+    for (t in cleanKeys)
+    {
+        $("#related").append("<a class=\"tagfilter\" href=\"#" + encodeURIComponent(cleanKeys[t]) + "\">" + cleanKeys[t] + "</a>, ");
+    }
+
+    /** Remove trailing ", ". */
+    $("#related").html($("#related").html().replace(/, $/, '.'));
+
 }
 
 
@@ -225,6 +293,7 @@ function updateView()
 {
     if (typeof window.location.hash !== 'string' || window.location.hash.length === 0)
     {
+        updateRelatedTags();
         return;
     }
 
@@ -235,6 +304,10 @@ function updateView()
             ? $(this).show() : $(this).hide();
     });
 
+    /*
+     * Update the related tags & page-title
+     */
+    updateRelatedTags(tag);
     updateTitle();
 }
 
@@ -347,6 +420,7 @@ function setup () {
                 (title.match(filter) || links.match(filter) || filter === "")
                     ? $(this).show() : $(this).hide();
             });
+            updateRelatedTags();
             updateTitle();
         });
 
