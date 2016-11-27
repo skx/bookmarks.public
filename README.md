@@ -6,13 +6,18 @@ via a simple combination of HTML, CSS & Javascript.
 
 * You add your bookmarks to the file `bookmarks.data`.
 * Then view them by opening `index.html` in your browser.
-     * This uses `bookmarks.css` to style them, and `bookmarks.js` to make them interactive.
+    * The file `bookmarks.css` is used to style the presentation.
+    * The file `bookmarks.js` makes the bookmarks interactive.
 
 
 Online Demo
 -----------
 
-You may try out the interface [in this online demo](http://www.steve.org.uk/Software/bookmarks/bookmarks.public/).
+You may out the interface in this the online demo:
+
+* https://www.steve.fi/Software/bookmarks/bookmarks.public/
+   * [Github Mirror](http://skx.github.io/bookmarks.public/).
+
 
 
 Rationale
@@ -59,20 +64,16 @@ your local `bookmarks.data` file with the updated version.
 
 ### Adding / Editing / Removing
 
-**Add Bookmark** form allows you to add new bookmark with name, link and comma-separated tags.
+Other online features are supported:
 
-When moving mouse over existing bookmark, you can either click *recycle icon* to delete it or
-*pencil icon* to edit it.
+The **Add Bookmark** form allows you to add new bookmark with name, link and comma-separated tags.
 
-Editing works just as adding new bookmark. It even happens in the same form, which temporary
-switches to editing mode (**Edit Bookmark** title and buttons to **Save** and **Cancel**).
-Editing replaces existing bookmark you selected before.
+When moving your mouse over an existing bookmark, you can either click *recycle icon* to delete it or *pencil icon* to edit it.  The editing action works just in the same way as adding a new bookmark.
 
 Contributing
 ------------
 
-If you wish to submit improvements to the javascript code, or layout, then
-I welcome forks & pull requests.
+If you wish to submit improvements to the javascript, or the CSS, then I welcome forks & pull requests.
 
 >**NOTE**: If you submit a change feel free to add a link to your homepage/blog/whatever as part of that.  The included bookmarks are only examples.
 
