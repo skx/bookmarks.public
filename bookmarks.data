@@ -1,16 +1,24 @@
-                        <li title="debian, planet"><a href="http://planet.debian.org/">Planet Debian</a></li>
-                        <li title="debian, development"><a href="http://www.debian.org/devel/">Debian Developers' Corner</a></li>
-                        <li title="sysadmin, planet"><a href="http://planetsysadmin.com/">Planet Sysadmin</a></li>
-                        <li title="sysadmin, reddit"><a href="http://www.reddit.com/r/sysadmin">Reddit: /r/sysadmin</a></li>
-                        <li title="blog, microsoft"><a href="http://blogs.msdn.com/b/oldnewthing/">The old new thing</a></li>
-                        <li title="blog, personal"><a href="https://blog.steve.fi/">Steve Kemp's blog</a></li>
-                        <li title="personal"><a href="https://steve.fi/">Steve Kemp's Website</a></li>
-                        <li title="development, personal"><a href="https://github.com/skx/">Steve Kemp's github account</a></li>
-                        <li title="news"><a href="https://news.ycombinator.com/">Hacker News</a></li>
-                        <li title="news, edinburgh"><a href="http://www.scotsman.com/edinburgh-evening-news">Edinburgh Evening News</a></li>
-                        <li title="pippo pelo, NEws"><a href="http://www.bbc.co.uk/news/">BBC News</a></li>
-                        <li title="personal, sysadmin, debian"><a href="http://debian-administration.org/">Debian Administration</a></li>
-                        <li title="sysadmin, stackexchange"><a href="http://serverfault.com/">Server Fault</a></li>
-                        <li title="photography, stackexchange"><a href="http://photo.stackexchange.com/">Photography Exchange</a></li>
-                        <li title="reddit, photography"><a href="http://www.reddit.com/r/photography/">Reddit /r/photography</a></li>
-                        <li><a href="http://www.thepondleith.co.uk/">The Pond, Leith</a></li>
+<li title="debian, planet"><a href="http://planet.debian.org/">Planet Debian</a></li>
+<li title="debian, development"><a href="http://www.debian.org/devel/">Debian Developers' Corner</a></li>
+<li title="sysadmin, planet"><a href="http://planetsysadmin.com/">Planet Sysadmin</a></li>
+<li title="sysadmin, reddit"><a href="http://www.reddit.com/r/sysadmin">Reddit: /r/sysadmin</a></li>
+<li title="blog, microsoft"><a href="http://blogs.msdn.com/b/oldnewthing/">The old new thing</a></li>
+<li title="blog, personal"><a href="https://blog.steve.fi/">Steve Kemp's blog</a></li>
+<li title="personal"><a href="https://steve.fi/">Steve Kemp's Website</a></li>
+<li title="development, personal"><a href="https://github.com/skx/">Steve Kemp's github account</a></li>
+<li title="news"><a href="https://news.ycombinator.com/">Hacker News</a></li>
+<li title="news, edinburgh"><a href="http://www.scotsman.com/edinburgh-evening-news">Edinburgh Evening News</a></li>
+<li title="pippo pelo, NEws"><a href="http://www.bbc.co.uk/news/">BBC News</a></li>
+<li title="personal, sysadmin, debian"><a href="http://debian-administration.org/">Debian Administration</a></li>
+<li title="sysadmin, stackexchange"><a href="http://serverfault.com/">Server Fault</a></li>
+<li title="photography, stackexchange"><a href="http://photo.stackexchange.com/">Photography Exchange</a></li>
+<li title="reddit, photography"><a href="http://www.reddit.com/r/photography/">Reddit /r/photography</a></li>
+<li><a href="http://www.thepondleith.co.uk/">The Pond, Leith</a></li>
+<li title="tools, privacy, online"><a href="https://amiunique.org/fp">Am I unique? Browser fingerprinting</a></li>
+<li title="aws, route53, amazon, github"><a href="https://github.com/open-guides/og-aws">Amazon Web Services — a practical guide</a></li>
+<li><a href="http://blog.darknedgy.net/technology/2015/09/05/0/">A history of modern init systems (1992-2015)</a></li>
+<li title="finnish, wikipedia, language, learning"><a href="http://en.wikipedia.org/wiki/Finnish_numerals">Finnish Numerals</a></li>
+<li title="prison, arrest, wikipedia"><a href="https://en.wikipedia.org/wiki/Cornealious_Michael_Anderson_III">Cornealious Michael Anderson III</a></li>
+<li title="geometry, wikipedia"><a href="https://en.wikipedia.org/wiki/Borromean_rings">Borromean Rings</a></li>
+<li title="geometry, wikipedia"><a href="https://en.wikipedia.org/wiki/Looped_square">Looped square</a></li>
+<li title="helsinki, finland, forum"><a href="http://www.finlandforum.org/">Moving to Finland, living in Finland, expat life in Finland & Finland Forum</a></li>
