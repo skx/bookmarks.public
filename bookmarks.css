@@ -29,3 +29,7 @@ table {
 span.context {
     cursor: pointer;
 }
+#footer {
+    text-align:right;
+    padding: 5px;
+}
