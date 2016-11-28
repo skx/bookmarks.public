@@ -13,7 +13,7 @@ via a simple combination of HTML, CSS & Javascript.
 Online Demo
 -----------
 
-You may out the interface in this the online demo:
+You may try out the interface in this online demo:
 
 * https://www.steve.fi/Software/bookmarks/bookmarks.public/
    * [Github Mirror](http://skx.github.io/bookmarks.public/).
