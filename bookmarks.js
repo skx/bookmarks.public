@@ -132,13 +132,16 @@ function addBookmark() {
     var link = $("#newLink").val();
     var tags = $("#newTags").val();
 
+    var date = new Date();
+    var secs = Math.trunc(date.getTime() / 1000);
+
     // If the name or link is empty then ignore.
     if ( ( ! name ) || ( ! link ) ) {
         return;
     }
 
     var current = document.getElementById("bookmarks").innerHTML;
-    var entry = '<li id="newOne" title="' + tags + '"><a href="' + link + '">' + name + '</a></li>';
+    var entry = '<li id="newOne" title="' + tags + '" time="' + secs + '"><a href="' + link + '">' + name + '</a></li>';
     current = current + entry;
     document.getElementById("bookmarks").innerHTML = current;
     populateTags();
@@ -329,10 +332,14 @@ function doneEditBookmark () {
  * Switch Add bookmark form to editing mode
  */
 function editBookmark (selector) {
+    var date = new Date();
+    var now  = Math.trunc(date.getTime() / 1000);
+
     // load form
     $('#newName').val(selector.find('> a').html());
     $('#newLink').val(selector.find('> a').attr('href'));
     $('#newTags').val(selector.attr('title'));
+    $('#newTime').val(selector.attr('time') || now );
 
     // switch to editing mode
     $('.whenadd').hide();
@@ -343,6 +350,7 @@ function editBookmark (selector) {
         selector.find('> a').html($('#newName').val());
         selector.find('> a').attr('href', $('#newLink').val());
         selector.attr('title', $('#newTags').val());
+        selector.attr('time', $('#newTime').val());
         // update tags
         toggleTags();
         toggleTags();
