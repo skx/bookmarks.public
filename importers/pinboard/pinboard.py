@@ -42,7 +42,9 @@ def write_data_file(bookmarks, filename):
                 bookmark['description'] = bookmark['href']
 
             bookmark['tags'] = ', '.join(bookmark['tags'].split(' '))
+
             fobj.write(BOOKMARK_PUBLIC_TPL.format(**bookmark))
+
 
 def main(api_token):
     bookmarks = get_bookmarks(api_token)
