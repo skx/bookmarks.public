@@ -62,6 +62,18 @@ To make your new additions permanent you must click `Save` and overwrite
 your local `bookmarks.data` file with the updated version.
 
 
+Importing Bookmarks
+-------------------
+
+There are some utilities to ease importing your bookmarks beneath the
+top-level `importers` directory:
+
+* `importers/firefox/firefox`
+   * Import bookmarks from a saved `bookmarks.html` which Firefox exports.
+* `importers/pinboard/pinboard.py`
+   * Import bookmarks hosted at http://pinboard.in/
+
+
 ### Adding / Editing / Removing
 
 Other online features are supported:
