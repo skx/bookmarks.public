@@ -33,3 +33,6 @@ span.context {
     text-align:right;
     padding: 5px;
 }
+.ui-menu-item {
+  font-size: 10pt;
+}
