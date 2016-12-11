@@ -166,7 +166,7 @@ function addBookmark() {
  * This function collects each distinct tag,
  * stripping whitespace, and placing into sorted order.
  */
-function populateTags()
+function collectTags()
 {
     var tags = {};
     $("#bookmarks").children().each(function () {
@@ -200,10 +200,19 @@ function populateTags()
 
     var cleanKeys = $.unique(keys); // remove duplicate tags
     cleanKeys.sort();
+    return cleanKeys;
+  }
+
+
+/**
+ * Display the tags in the sidebar.
+ */
+function populateTags() {
+    tags = collectTags();
     $("#autotags").html("");
-    for (t in cleanKeys)
+    for (t in tags)
     {
-        $("#autotags").append("<a class=\"tagfilter\" href=\"#" + encodeURIComponent(cleanKeys[t]) + "\">" + cleanKeys[t] + "</a>, ");
+        $("#autotags").append("<a class=\"tagfilter\" href=\"#" + encodeURIComponent(tags[t]) + "\">" + tags[t] + "</a>, ");
     }
 
     /** Remove trailing ", ". */
@@ -384,6 +393,50 @@ function setupEditRemove () {
 }
 
 /**
+ * Setup autocomplete of tags in the "Add/Edit Bookmark" form
+ * Based on http://jqueryui.com/autocomplete/#multiple
+ */
+function setupAutocomplete () {
+    function split (val) {
+        return val.split(/,\s*/);
+    }
+    function extractLast (term) {
+        return split(term).pop();
+    }
+  $( "#newTags" )
+    // don't navigate away from the field on tab when selecting an item
+    .on( "keydown", function (event) {
+        if (event.keyCode === $.ui.keyCode.TAB &&
+                $(this).autocomplete("instance").menu.active) {
+            event.preventDefault();
+        }
+    })
+    .autocomplete({
+        minLength: 0,
+        source: function (request, response) {
+            // delegate back to autocomplete, but extract the last term
+            response($.ui.autocomplete.filter(
+                collectTags(), extractLast(request.term)));
+        },
+        focus: function () {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function (event, ui) {
+            var terms = split(this.value);
+            // remove the current input
+            terms.pop();
+            // add the selected item
+            terms.push( ui.item.value );
+            // add placeholder to get the comma-and-space at the end
+            terms.push("");
+            this.value = terms.join(", ");
+            return false;
+        }
+    });
+}
+
+/**
  * Load our bookmarks from the URL `bookmarks.data`, and setup our
  * initial state + listeners.
  */
@@ -433,6 +486,9 @@ function setup () {
         });
 
         setupEditRemove();
+
+        /** Add tag autocomplete to the "add bookmark" form. */
+        setupAutocomplete();
 
         /*
          * Now update the view - in case we were loaded with a
