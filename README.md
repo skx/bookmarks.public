@@ -15,8 +15,7 @@ Online Demo
 
 You may try out the interface in this online demo:
 
-* https://www.steve.fi/Software/bookmarks/bookmarks.public/
-   * [Github Mirror](http://skx.github.io/bookmarks.public/).
+* [Online Demo](http://skx.github.io/bookmarks.public/).
 
 
 
