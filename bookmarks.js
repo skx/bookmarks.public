@@ -437,6 +437,30 @@ function setupAutocomplete () {
 }
 
 /**
+ * Handle URL parameters to add a bookmark
+ */
+function handleParams () {
+    // thanks http://stackoverflow.com/a/901144/539470
+    var parm = function(name) {
+	name = name.replace(/[\[\]]/g, "\\$&");
+	var url = window.location.href;
+	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+	if (!results) return null;
+	if (!results[2]) return '';
+	return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    switch(parm("op")) {
+    case "bookmark":
+	$('#newName').value(parm("title"));
+	$('#newLink').value(parm("url"));
+	break;
+    default:
+	// do nothing
+    }
+}
+
+/**
  * Load our bookmarks from the URL `bookmarks.data`, and setup our
  * initial state + listeners.
  */
@@ -495,6 +519,9 @@ function setup () {
          * hash
          */
         updateView();
+
+        /** Handle URL parameters */
+        handleParams();
     });
 }
 

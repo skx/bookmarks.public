@@ -82,6 +82,23 @@ The **Add Bookmark** form allows you to add new bookmark with name, link and com
 
 When moving your mouse over an existing bookmark, you can either click *recycle icon* to delete it or *pencil icon* to edit it.  The editing action works just in the same way as adding a new bookmark.
 
+### Bookmarklet
+
+Bookmarking this as browser bookmark should help you to bookmark current page:
+
+    var ba = $('<a href="" target="_blank">Bookmark this page</a>');
+    ba.attr("href", "__URL_OF_YOUR_REPO__/index.html" +
+        "?op=bookmark" +
+        "&title=" + encodeURIComponent(document.title) +
+        "&url="   + encodeURIComponent(window.location.href)
+    );
+    $('body').append(ba);
+    ba.get(0).click();
+
+Please edit and use a bookmarklet of it. You can create it (using jQuery!) with http://mrcoles.com/bookmarklet/ for example.
+
+*Note:* there can be security problems when opening `file:///` URLs on pages from network: browser can just forbid it.
+
 Contributing
 ------------
 
