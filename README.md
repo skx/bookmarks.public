@@ -86,14 +86,18 @@ When moving your mouse over an existing bookmark, you can either click *recycle 
 
 Bookmarking this as browser bookmark should help you to bookmark current page:
 
-    var ba = $('<a href="" target="_blank">Bookmark this page</a>');
-    ba.attr("href", "__URL_OF_YOUR_REPO__/index.html" +
+    var ba = document.createElement('a');
+    ba.innerHTML = "Bookmark this Page";
+    ba.target = "_blank";
+    ba.href = "__URL_OF_YOUR_REPO__/index.html" +
         "?op=bookmark" +
         "&title=" + encodeURIComponent(document.title) +
         "&url="   + encodeURIComponent(window.location.href)
-    );
-    $('body').append(ba);
-    ba.get(0).click();
+    ;
+    document.body.appendChild(ba);
+    var ev = document.createEvent('Events');
+    ev.initEvent('click', true, false);
+    ba.dispatchEvent(ev);
 
 Please edit and use a bookmarklet of it. You can create it (using jQuery!) with http://mrcoles.com/bookmarklet/ for example.
 

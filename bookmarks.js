@@ -452,8 +452,8 @@ function handleParams () {
     }
     switch(parm("op")) {
     case "bookmark":
-	$('#newName').value(parm("title"));
-	$('#newLink').value(parm("url"));
+	$('#newName').prop('value', parm("title"));
+	$('#newLink').prop('value', parm("url"));
 	break;
     default:
 	// do nothing
