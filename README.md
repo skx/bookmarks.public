@@ -86,7 +86,7 @@ When moving your mouse over an existing bookmark, you can either click *recycle 
 For the most of popular web browsers you can install a [userscript](https://en.wikipedia.org/wiki/Greasemonkey) from [here](add-bookmark.user.js).
 
 It will add userscript menu commands to setup URL of your `index.html` bookmark manager file and to bookmark current page.
-Last one will fill open bookmark manager with new bookmark title and URL filled in — very helpful.
+Last one will open bookmark manager with new bookmark title and URL filled in — very helpful.
 
 Contributing
 ------------
