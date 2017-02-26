@@ -81,41 +81,12 @@ The **Add Bookmark** form allows you to add new bookmark with name, link and com
 
 When moving your mouse over an existing bookmark, you can either click *recycle icon* to delete it or *pencil icon* to edit it.  The editing action works just in the same way as adding a new bookmark.
 
-### Bookmarklet
+### Browser Integration
 
-Bookmarking this as browser bookmark should help you to bookmark current page:
+For the most of popular web browsers you can install a [userscript](https://en.wikipedia.org/wiki/Greasemonkey) from [here](add-bookmark.user.js).
 
-    var ba = document.createElement('a');
-    ba.innerHTML = "&#x1f516;";
-    ba.target = "_blank";
-    ba.href = "__URL_OF_YOUR_REPO__/index.html" +
-        "?op=bookmark" +
-        "&title=" + encodeURIComponent(document.title) +
-        "&url="   + encodeURIComponent(window.location.href)
-    ;
-    Object.assign(ba.style, {
-      'color': 'black',
-      'font-size': '1.2cm'
-    });
-    var bd = document.createElement('div');
-    Object.assign(bd.style, {
-      'position': 'absolute',
-      'z-index': 16777271,
-      'top': "" + (window.pageYOffset + 10) + "px",
-      'left': '10px',
-      'width': '2cm',
-      'height': '2cm',
-      'background-color': 'white',
-      'border': 'solid 1px black',
-      'vertical-align': 'middle',
-      'text-align': 'center'
-    });
-    bd.appendChild(ba);
-    document.body.appendChild(bd);
-
-Please edit and use a bookmarklet of it. You can create it (using jQuery!) with http://mrcoles.com/bookmarklet/ for example.
-
-*Note:* there can be security problems when opening `file:///` URLs on pages from network: browser can just forbid it.
+It will add userscript menu commands to setup URL of your `index.html` bookmark manager file and to bookmark current page.
+Last one will fill open bookmark manager with new bookmark title and URL filled in — very helpful.
 
 Contributing
 ------------
