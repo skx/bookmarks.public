@@ -452,8 +452,8 @@ function handleParams () {
     }
     switch(parm("op")) {
     case "bookmark":
-	$('#newName').prop('value', parm("title"));
-	$('#newLink').prop('value', parm("url"));
+        $('#newName').prop('value', parm("title"));
+        $('#newLink').prop('value', parm("url"));
         $('#add_bookmark').get(0).scrollIntoView();
 	break;
     default:
