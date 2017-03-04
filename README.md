@@ -87,7 +87,7 @@ For the most of popular web browsers you can install a [userscript](https://en.w
 from [here](add-bookmark.user.js) by clicking **Raw** link.
 
 The intention is that when you use **Bmks.pub.: Add This Page** userscript menu item, browser displays your bookmarks page
-having URL and Title areas populated with the appropriate link and title, such that new bookmark can be added quickly and easily.
+having *Link* and *Title* areas populated with the appropriate link and title, such that new bookmark can be added quickly and easily.
 Userscript works properly regardless to your bookmarks location, as it is allowed to open the both `file://` and
 `http(s)://` URLs. Before bookmarking, please also specify correct `index.html` location using **Bmks.pub.: Settings** menu item.
 
@@ -103,7 +103,7 @@ If you access your bookmarks via `http(s)://`, you may prefer to use following b
 To get it working, please correct your bookmarks URL in the first line, [convert it to bookmarklet](http://mrcoles.com/bookmarklet/),
 add browser bookmark with this bookmarklet URL and assign it a shortcut (say, `bl`). Then, when you type `bl` in URL edit box,
 browser should suggest using this bookmarklet. The result will be similar: new tab with your bookmarks and your new bookmark
-with URL and Title populated.
+with *Link* and *Title* populated.
 
 Contributing
 ------------
