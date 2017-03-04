@@ -3,7 +3,8 @@
 // @description   Opens bookmark management page to bookmark current page
 // @author        dluciv
 // @license       WTFPLv2 (http://wtfpl.net/)
-// @version       0.1.0
+// @version       0.1.1
+// @namespace     https://github.com/skx/bookmarks.public/
 //
 // @grant         GM_getValue
 // @grant         GM_setValue
@@ -28,7 +29,7 @@
       path_to_bmk_html: {
         label: 'Path to index.html with bookmarks',
         type: 'text',
-        'default': 'http://bookmarks.local/bookmarks/index.html'
+        'default': 'file:///home/me/bookmarks.public/index.html'
       }
     }
   });
@@ -37,7 +38,7 @@
     return GM_config.close();
   };
 
-  GM_registerMenuCommand("Bmks.pub. — Add This Page", function() {
+  GM_registerMenuCommand("Bmks.pub.: Add This Page", function() {
     var href = GM_config.get('path_to_bmk_html') +
         "?op=bookmark" +
         "&title=" + encodeURIComponent(document.title) +
@@ -46,7 +47,7 @@
     GM_openInTab(href);
   });
 
-  GM_registerMenuCommand("Bmks.pub. Settings", function() {
+  GM_registerMenuCommand("Bmks.pub.: Settings", function() {
     return GM_config.open();
   });
 
