@@ -83,7 +83,8 @@ When moving your mouse over an existing bookmark, you can either click *recycle 
 
 ### Browser Integration
 
-For the most of popular web browsers you can install a [userscript](https://en.wikipedia.org/wiki/Greasemonkey) from [here](add-bookmark.user.js).
+For the most of popular web browsers you can install a [userscript](https://en.wikipedia.org/wiki/Greasemonkey)
+from [here](add-bookmark.user.js) by clicking **Raw** link.
 
 The intention is that when you use **Bmks.pub.: Add This Page** userscript menu item, browser displays your bookmarks page
 having URL and Title areas populated with the appropriate link and title, such that new bookmark can be added quickly and easily.
