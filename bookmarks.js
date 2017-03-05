@@ -541,7 +541,7 @@ function saveDataFile() {
     // beautify text
     text = text.trim().replace(/[\n\r]+/g, "").replace(/<\/li><li/g, "</li>\n<li");
     // sort bookmarks to minimize diff, as they can be reordered when browsing them
-    text = text.split('\n').sort().join('\n');
+    text = text.split('\n').sort().join('\n') + '\n'; // newline before EOF
 
     // below code was inspired by TiddlyWiki
     var a = $('<a target="_blank" />').appendTo('body');
