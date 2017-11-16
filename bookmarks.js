@@ -11,6 +11,8 @@ function clearFilter() {
     $("#bookmarks").children().each(function () {
         $(this).show();
     });
+
+    window.location.hash  = "";
     updateRelatedTags();
     updateTitle();
 }
@@ -23,6 +25,7 @@ function showUntagged() {
         var tags = $(this).attr('title');
         (typeof tags !== 'undefined') ? $(this).hide() : $(this).show();
     });
+    window.location.hash  = "";
     updateTitle();
 }
 
@@ -34,6 +37,7 @@ function showRandom() {
     $("#bookmarks").children().each(function () {
         $(this).hide();
     });
+    window.location.hash  = "";
 
     var links = $('#bookmarks').children(),
         len = links.length, random, i, $a;
@@ -48,7 +52,7 @@ function showRandom() {
 
 
 /**
-* Poplate the "related tags" area.
+* Populate the "related tags" area.
 */
 function updateRelatedTags(tag)
 {
