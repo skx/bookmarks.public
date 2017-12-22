@@ -14,6 +14,19 @@ There is a simple online demo hosted at the following location:
 * [Online Demo](http://skx.github.io/bookmarks.public/).
 
 
+
+Browser Limitations
+-------------------
+
+Because the javascript attempts to open the `bookmarks.data` file via a
+`file://` URI this "application" will __not__ work on all browsers.
+
+The author is happy that it works on Firefox/Iceweasel, and would welcome
+any operational improvements for other browsers.  Currently this is __known to
+fail__ upon Chrome and Safari.
+
+
+
 Rationale
 ---------
 
