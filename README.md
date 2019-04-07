@@ -9,9 +9,6 @@ via a simple combination of HTML, CSS & Javascript.
     * The file `bookmarks.css` is used to style the presentation.
     * The file `bookmarks.js` makes the bookmarks interactive.
 
-There is a simple online demo hosted at the following location:
-
-* [Online Demo](http://skx.github.io/bookmarks.public/).
 
 
 
